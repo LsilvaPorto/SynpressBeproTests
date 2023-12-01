@@ -14,7 +14,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       synpressPlugins(on, config);
     },
-    baseUrl: "https://afrodite.taikai.network/",
+    baseUrl: "https://apollodorus.bepro.network/",
     supportFile: "cypress/support/e2e.js",
   },
 });

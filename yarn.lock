@@ -6514,7 +6514,7 @@ ethereumjs-abi@0.6.5:
 "ethereumjs-abi@git+https://github.com/ethereumjs/ethereumjs-abi.git":
   version "0.6.8"
   resolved "git+ssh://git@github.com/ethereumjs/ethereumjs-abi.git"
-  integrity sha512-OOi2GVnOQrwxItJo6AdjAPgHZcyQjYT6xMq5ofueVfKOl3ce8KHtlTiwd3xTXvDSmLKZEsBYQ2Bsp6daL+5kNg==
+  integrity sha512-qs8G5KwnIO/thOQjv1RvR/4oiTsy6IaCsN+ory5dbiqFXz8sd239aWJH0wmsVNPimL5X1KzQheUpi6xAo6FU4w==
   dependencies:
     bn.js "^4.11.8"
     ethereumjs-util "^6.0.0"

@@ -3,10 +3,10 @@ const page = new Page();
 
 describe("connect wallet spec", () => {
   before(() => {
-    page.setupEnviroment();
+    cy.visit('/');
   });
 
   it.only("should connect wallet with success", () => {
-    //page.connectWallet();
+    page.connectWallet();
   });
 })
