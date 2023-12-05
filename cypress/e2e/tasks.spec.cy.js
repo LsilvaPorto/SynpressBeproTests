@@ -8,11 +8,6 @@ describe("connect wallet spec", () => {
     page.connectWallet();
   });
 
-  // afterEach(() => {
-  //   cy.clearLocalStorage();
-  //   cy.visit('/');
-  // })
-
   it("should connect wallet with success", () => {
     cy.get(locator.profileIcon).should('be.visible');
   });
