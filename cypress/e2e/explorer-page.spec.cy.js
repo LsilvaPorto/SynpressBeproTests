@@ -1,11 +1,11 @@
-import ExplorePage from "../pages/explore/explore";
-const explorePage = new ExplorePage();
-const locator = explorePage.locator;
+import Page from "../pages/page";
+const page = new Page();
+const locator = page.locator;
 
 describe("connect wallet spec", () => {
   before(() => {
     cy.visit('/');
-    explorePage.connectWallet();
+    page.connectWallet();
   });
 
   // afterEach(() => {
@@ -18,7 +18,7 @@ describe("connect wallet spec", () => {
   });
   
   it.only("should create a task with success", () => {
-    explorePage.createTask();
+    page.createTask();
   });
 
 

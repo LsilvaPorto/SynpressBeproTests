@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
     "@synthetixio/synpress": "^3.5.1",
     "cypress": "^12.7.0",
     "env-cmd": "^10.1.0",

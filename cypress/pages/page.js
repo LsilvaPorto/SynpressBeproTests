@@ -1,3 +1,4 @@
+const { faker } = require('@faker-js/faker');
 export default class Page {
 
     locator = {
@@ -16,14 +17,56 @@ export default class Page {
         inputTotalAmmount: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div.mt-4 > div > div:nth-child(4) > div.row.justify-content-between > div.col-md-4.col-12.mt-1 > div > div.input-group.border-radius-4 > input',
     };
 
-    getTitle() {
-        return cy.title();
-    }
-
     connectWallet() {
         cy.get(this.locator.btn).contains("Connect Wallet").click();
         cy.acceptMetamaskAccess().wait(3000);
         cy.confirmMetamaskDataSignatureRequest();
     }
+
+    CreateMarketplaceName(){
+        const mp = faker.company.name();
+        return mp;
+    }
+    
+    CreateTaskTitle(){
+        const task = faker.lorem.words(5);
+        return task;
+    }
+    
+    CreateTaskDescription(){
+       const description = faker.lorem.paragraphs(10, '<br/>\n');
+       return description;
+    }
+
+    createTask() {
+        cy.get(this.locator.btnAcceptCookies).click();
+        cy.get(this.locator.btnCreate).contains("Create").click();
+        cy.get(this.locator.btnCreateTask).contains("Task").click();
+        cy.get(this.locator.inputMearketPlaceSelect).click();
+        // Clica no item com texto "bepro" dentro do dropdown
+        cy.contains(this.locator.beproMarketSelect, 'bepro').click();
+        cy.get(this.locator.btnNext).click();
+
+        
+        cy.get(this.locator.inputTaskTitle).type("Teste de criação de tarefa", { force: true });
+        cy.fixture('taskDescription.txt').then((taskDescription) => {
+            cy.get(this.locator.InputTaskDetails).type(taskDescription, { force: true });
+        })
+        cy.get(this.locator.inputTags).click();
+        cy.get(this.locator.tagTesting).click();
+
+        cy.get(this.locator.btn).contains('Code').click({ force: true });
+        cy.get(this.locator.btnNext).click();
+        cy.wait(1000);
+        cy.get(this.locator.inputTotalAmmount).type(100);
+        cy.get(this.locator.btnNext).click();
+        cy.get(this.locator.btn).contains('Approve').click({ force: true });
+        cy.confirmMetamaskPermissionToSpend();
+        cy.get(this.locator.btn).contains('Create Task').click({ force: true });
+        cy.confirmMetamaskTransaction();
+
+    }
+
+    
 
 }
