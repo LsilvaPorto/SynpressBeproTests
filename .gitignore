@@ -3,5 +3,3 @@ node_modules
 package-lock.json
 yarn.lock
 cypress.env.json
-/cypress/screenshots
-/cypress/videos

@@ -14,6 +14,7 @@ describe("connect wallet spec", () => {
   
   it.only("should create a task with success", () => {
     page.createTask();
+    cy.get(locator.spanDraft, { timeout: 300000 }).should('be.visible');
   });
 
 

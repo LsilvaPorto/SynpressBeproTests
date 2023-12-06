@@ -4,10 +4,12 @@ export default class Page {
 
     locator = {
         btnAcceptCookies: "#rcc-confirm-button",
+        btnConnect: '.btn-white > span > .d-flex',
         btn: "button",
-        btnCreate: "#multiAction > div > div.react-select__value-container.react-select__value-container--has-value.css-hlgwow > div > span.text-truncate.text-uppercase",
+        btnCreate: ':nth-child(3) > .read-only-wrapper > .multi-action-button > #multiAction > .react-select__control > .react-select__value-container > .d-flex > .text-truncate',
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
         btnCreateTask: '.react-select__menu-list .react-select__option',
+        btnApprove: ':nth-child(2) > .justify-content-end > .row.justify-content-center > .col-xs-12 > .d-none > .pe-2 > .btn',
         inputMearketPlaceSelect: "#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div > div.select-network-dropdown.w-max-none > div > div",
         beproMarketSelect: ".react-select__option",
         btnNext: '#root-container > div.d-none.d-md-flex.flex-column > div.container-xl.d-flex.flex-column.justify-content-end > div > div > div.d-none.d-md-flex.row.my-4 > div.col-6.pe-2 > button',
@@ -16,7 +18,7 @@ export default class Page {
         inputTags: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div.form-group.mt-4.mb-0 > div.react-select-container.css-b62m3t-container > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
         tagTesting: '.react-select__menu .react-select__option:contains("Testing")',
         inputTotalAmmount: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div.mt-4 > div > div:nth-child(4) > div.row.justify-content-between > div.col-md-4.col-12.mt-1 > div > div.input-group.border-radius-4 > input',
-        spanDraft: 'span:contains("Draft")',
+        spanDraft: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div > div > span',
 
     };
 
@@ -28,16 +30,15 @@ export default class Page {
         btnApprove: 'Approve',
         btnConnectWallet: 'Connect Wallet',
         btnBepro: 'bepro',
-        btnCreate: 'Create',
         btnTask: 'Task',
     }
 
     value = null;
 
     connectWallet() {
-        cy.get(this.locator.btn).contains(this.btnText.btnConnectWallet).click();
+        cy.get(this.locator.btnConnect).click()
         cy.acceptMetamaskAccess()
-        cy.get(this.locator.btn).contains(this.btnText.btnConnectWallet).click();
+        cy.get(this.locator.btnConnect).click()
         cy.confirmMetamaskDataSignatureRequest();
     }
 
@@ -113,14 +114,14 @@ export default class Page {
       }
 
     approve() {
-        cy.wait(1000);
-        cy.get(this.locator.btn).contains(this.btnText.btnApprove).click();
+        // cy.wait(5000)
+        cy.get(this.locator.btnApprove).wait(1500).click({force: true});
         cy.confirmMetamaskPermissionToSpend(this.value);
     }
 
     createTask() {
         cy.get(this.locator.btnAcceptCookies).click();
-        cy.get(this.locator.btnCreate).contains(this.btnText.btnCreate).click();
+        cy.get(this.locator.btnCreate).click();
         cy.get(this.locator.btnCreateTask).contains(this.btnText.btnTask).click();
         cy.get(this.locator.inputMearketPlaceSelect).click();
 
@@ -136,11 +137,9 @@ export default class Page {
         cy.get(this.locator.btnNext).click();
         this.approve();
 
-        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask).wait(200).click({ force: true });
+        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask).wait(1500).click({ force: true });
         cy.confirmMetamaskTransaction();
-        cy.get(this.locator.spanDraft, { timeout: 300000 });
-        cy.wait(100000);
-
+        
     }
 
 
