@@ -1,6 +1,9 @@
 import Page from "../pages/page";
+import TaskPage from "../pages/task/task";
 const page = new Page();
 const locator = page.locator;
+const taskPage = new TaskPage();
+const taskLocator = taskPage.locator;
 
 describe("connect wallet spec", () => {
   before(() => {
@@ -12,10 +15,13 @@ describe("connect wallet spec", () => {
     cy.get(locator.profileIcon).should('be.visible');
   });
   
-  it.only("should create a task with success", () => {
+  it("should create a task with success", () => {
     page.createTask();
-    cy.get(locator.spanDraft, { timeout: 300000 }).should('be.visible');
+    cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
   });
 
+  // it.only("should create a Delivery with success", () => {
+  //   page.createDeliverable();
+  // });
 
 })

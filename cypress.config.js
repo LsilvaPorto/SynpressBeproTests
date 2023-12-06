@@ -5,6 +5,8 @@ module.exports = defineConfig({
   userAgent: "synpress",
   chromeWebSecurity: true,
   defaultCommandTimeout: 30000,
+  viewportWidth: 1688,
+  viewportHeight: 768,
   pageLoadTimeout: 60000,
   requestTimeout: 30000,
   e2e: {
