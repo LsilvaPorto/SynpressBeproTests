@@ -20,8 +20,8 @@ describe("connect wallet spec", () => {
     cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
   });
 
-  // it.only("should create a Delivery with success", () => {
-  //   page.createDeliverable();
-  // });
+  it("should create a Delivery with success", () => {
+    taskPage.createDeliverable();
+  });
 
 })

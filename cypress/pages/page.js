@@ -74,7 +74,7 @@ export default class Page {
     }
 
     fillTaskDescription() {
-        const description = 'teste'//this.createTaskDescription();
+        const description = this.createTaskDescription();
         cy.get(this.locator.InputTaskDescription).type(description, { force: true });
     }
 
