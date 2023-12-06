@@ -5111,6 +5111,11 @@ cypress-wait-until@^1.7.2:
   resolved "https://registry.npmjs.org/cypress-wait-until/-/cypress-wait-until-1.7.2.tgz"
   integrity sha512-uZ+M8/MqRcpf+FII/UZrU7g1qYZ4aVlHcgyVopnladyoBrpoaMJ4PKZDrdOJ05H5RHbr7s9Tid635X3E+ZLU/Q==
 
+cypress-wait-until@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/cypress-wait-until/-/cypress-wait-until-3.0.1.tgz"
+  integrity sha512-kpoa8yL6Bi/JNsThGBbrrm7g4SNzYyBUv9M5pF6/NTVm/ClY0HnJzeuWnHiAUZKIZ5l86Oedb12wQyjx7/CWPg==
+
 cypress@*, cypress@^12.0.0, cypress@^12.7.0:
   version "12.7.0"
   resolved "https://registry.npmjs.org/cypress/-/cypress-12.7.0.tgz"

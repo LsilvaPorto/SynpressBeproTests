@@ -1,3 +1,4 @@
+import 'cypress-wait-until';
 const { faker } = require('@faker-js/faker');
 export default class Page {
 
@@ -15,6 +16,8 @@ export default class Page {
         inputTags: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div.form-group.mt-4.mb-0 > div.react-select-container.css-b62m3t-container > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
         tagTesting: '.react-select__menu .react-select__option:contains("Testing")',
         inputTotalAmmount: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div.mt-4 > div > div:nth-child(4) > div.row.justify-content-between > div.col-md-4.col-12.mt-1 > div > div.input-group.border-radius-4 > input',
+        spanDraft: 'span:contains("Draft")',
+
     };
 
     btnText = {
@@ -28,30 +31,32 @@ export default class Page {
         btnCreate: 'Create',
         btnTask: 'Task',
     }
+
     value = null;
+
     connectWallet() {
         cy.get(this.locator.btn).contains(this.btnText.btnConnectWallet).click();
-        cy.acceptMetamaskAccess().wait(3000);
+        cy.acceptMetamaskAccess()
         cy.get(this.locator.btn).contains(this.btnText.btnConnectWallet).click();
         cy.confirmMetamaskDataSignatureRequest();
     }
 
-    CreateMarketplaceName() {
+    createMarketplaceName() {
         const mp = faker.company.name();
         return mp.toString();
     }
 
-    CreateTaskTitle() {
+    createTaskTitle() {
         const task = faker.lorem.words(5);
         return task.toString();
     }
 
-    CreateTaskDescription() {
+    createTaskDescription() {
         const description = faker.lorem.paragraphs(2, '<br/>\n');
         return description.toString();
     }
 
-    createTaskValues() {
+    createTaskValue() {
         const value = faker.number.int({ max: 1000 })
         return value;
     }
@@ -63,12 +68,12 @@ export default class Page {
     }
 
     fillTaskTitle() {
-        const title = this.CreateTaskTitle();
+        const title = this.createTaskTitle();
         cy.get(this.locator.inputTaskTitle).type(title, { force: true });
     }
 
     fillTaskDescription() {
-        const description = this.CreateTaskDescription();
+        const description = 'teste'//this.createTaskDescription();
         cy.get(this.locator.InputTaskDescription).type(description, { force: true });
     }
 
@@ -79,14 +84,37 @@ export default class Page {
     }
 
     insertValue() {
-        const value = this.createTaskValues();
-        cy.get(this.locator.inputTotalAmmount).type(value);
-        this.value = value;
-    }
+        cy.waitUntil(() => {
+          // Use cy.get dentro do loop para obter o elemento atualizado
+          return cy.get('div.text-truncate span.text-gray')
+            .contains('Total Balance:')
+            .parent('div.text-truncate')
+            .invoke('text')
+            .then((text) => {
+              const match = text.match(/Total Balance: ([\d,]+\.\d+) TUSD/);
+      
+              // Verifique se houve uma correspondência e se o valor é maior que zero
+              if (match) {
+                const balance = parseFloat(match[1].replace(',', '.')); // Substitui vírgula por ponto
+                return balance > 0;
+              }
+      
+              // Se não houver correspondência, continue esperando
+              return false;
+            });
+        }, { timeout: 10000, interval: 500 })
+          .then(() => {
+            // Agora que a condição foi atendida, você pode realizar ações adicionais
+            const value = this.createTaskValue();
+            cy.get(this.locator.inputTotalAmmount).type(value);
+            this.value = value;
+            cy.wait(2000);
+          });
+      }
 
     approve() {
-        // cy.get(this.locator.btn).contains(this.btnText.btnApprove).click({ force: true });
-        cy.get("button").contains("Approve").click({ force: true });
+        cy.wait(1000);
+        cy.get(this.locator.btn).contains(this.btnText.btnApprove).click();
         cy.confirmMetamaskPermissionToSpend(this.value);
     }
 
@@ -100,15 +128,17 @@ export default class Page {
         this.fillTaskTitle();
         this.fillTaskDescription();
         this.insertTag();
-        
+
         cy.get(this.locator.btn).contains(this.btnText.btnCode).click({ force: true });
         cy.get(this.locator.btnNext).click();
         this.insertValue();
 
         cy.get(this.locator.btnNext).click();
         this.approve();
-        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask).click({ force: true });
+
+        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask).wait(200).click({ force: true });
         cy.confirmMetamaskTransaction();
+        cy.get(this.locator.spanDraft, { timeout: 300000 });
         cy.wait(100000);
 
     }
