@@ -10,25 +10,35 @@ export default class TaskPage extends Page {
         inputDeliverableDescription: '.p-1 > .form-control',
         btnCreateDeliverable: '.d-none.d-flex > .ps-3 > .btn',
     }
+    link = 'https://afrodite.bepro.network';
     waitTaskChangeStatusToOpen() {
         cy.wait(75000);
         cy.reload();
     }
 
-    createDeliverableLink(){
-        const link = faker.internet.url();
-    }
-
     createDeliverable() {
-        this.waitTaskChangeStatusToOpen();
-        cy.get(this.locator.btnStartWorking).wait(5000).click({ force: true }).click({ force: true });
-        cy.log('Start Working button pressed');
-        cy.get(this.locator.btnCreateDeliverable).wait(1000).click({ force: true });
+        cy.wait(5000);
+        //this.waitTaskChangeStatusToOpen();
+        // Encontre o botão pelo seu texto
+        cy.get('#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > div > button').invoke('text').then(($buttonText) => {
+            if ($buttonText === 'Start Working') {
+                // O botão "Start Working" está presente, clique nele
+                cy.get('#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > div > button').click({ force: true });
 
-        cy.get(this.locator.inputRepoLink).type(this.createDeliverableLink(), { force: true });
+                // Agora, clique no botão "Create Deliverable"
+                cy.get('#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > div > button').contains('Create Deliverable').wait(1000).click({ force: true });
+            } else {
+                // O botão "Start Working" não está presente, clique diretamente no botão "Create Deliverable"
+                cy.log('Start Working button not present, clicking Create Deliverable directly');
+                cy.get('#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > div > button').contains('Create Deliverable').wait(1000).click({ force: true });
+            }
+        });
+
+        cy.get(this.locator.inputDeliverableLink).type(this.link, { force: true });
+        cy.get('img[src="https://afrodite.bepro.network/images/meta-thumbnail.jpeg"].border-radius-8');
         cy.get(this.locator.inputDeliverableTitle).type(this.createTaskTitle(), { force: true });
         cy.get(this.locator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
-        cy.get(this.locator.btnCreateDeliverable).wait(1000).click({ force: true });
-        cy.wait(100000);
+        cy.get(this.locator.btnCreateDeliverable).wait(1000).click();
+        cy.acceptMetamask();
     }
 }

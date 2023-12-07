@@ -11,7 +11,7 @@
     "start-server-and-test": "^2.0.0"
   },
   "scripts": {
-    "test": "env-cmd -f .env cypress run --browser chrome --headed",
+    "test": "env-cmd -f .env cypress run --browser chrome --headed --no-exit",
     "start:server": "serve node_modules/@metamask/test-dapp/dist -p 3000",
     "cypress:run": "start-server-and-test 'yarn start:server' http-get://localhost:3000 'yarn cypress:run'"
   },

@@ -14,13 +14,14 @@ describe("connect wallet spec", () => {
   it("should connect wallet with success", () => {
     cy.get(locator.profileIcon).should('be.visible');
   });
-  
+
   it("should create a task with success", () => {
     page.createTask();
     cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
   });
 
-  it("should create a Delivery with success", () => {
+  it.only("should create a Delivery with success", () => {
+    cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createDeliverable();
   });
 
