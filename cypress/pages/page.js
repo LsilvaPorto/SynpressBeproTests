@@ -36,9 +36,9 @@ export default class Page {
     value = null;
 
     connectWallet() {
-        cy.get(this.locator.btnConnect).click()
-        cy.acceptMetamaskAccess()
-        cy.get(this.locator.btnConnect).click()
+        cy.get(this.locator.btnConnect).click();
+        cy.acceptMetamaskAccess();
+        cy.get(this.locator.btnConnect).click();
         cy.confirmMetamaskDataSignatureRequest();
     }
 
@@ -120,7 +120,6 @@ export default class Page {
     }
 
     createTask() {
-        cy.get(this.locator.btnAcceptCookies).click();
         cy.get(this.locator.btnCreate).click();
         cy.get(this.locator.btnCreateTask).contains(this.btnText.btnTask).click();
         cy.get(this.locator.inputMearketPlaceSelect).click();

@@ -7,7 +7,9 @@ const taskLocator = taskPage.locator;
 
 describe("connect wallet spec", () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('/').then(() => {
+      cy.get(locator.btnAcceptCookies).click();
+    })
     page.connectWallet();
   });
 
@@ -21,8 +23,11 @@ describe("connect wallet spec", () => {
   });
 
   it.only("should create a Delivery with success", () => {
-    cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
+    // cy.get('#infinite-scroll > div:nth-child(20) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createDeliverable();
+    cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
+    
+
   });
 
 })
