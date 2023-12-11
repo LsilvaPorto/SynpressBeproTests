@@ -22,10 +22,10 @@ describe("connect wallet spec", () => {
     cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
   });
 
-  it.only("should create a Delivery with success", () => {
+  it("should create a Delivery with success", () => {
     // cy.get('#infinite-scroll > div:nth-child(20) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createDeliverable();
-    cy.get(taskLocator.statusTaskComponent, { timeout: 300000 }).should('be.visible');
+    cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
     
   });
 

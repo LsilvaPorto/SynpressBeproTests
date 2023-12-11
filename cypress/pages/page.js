@@ -84,39 +84,32 @@ export default class Page {
 
     }
 
-    insertValue() {
+    fillTaskValue() {
         cy.waitUntil(() => {
-          // Use cy.get dentro do loop para obter o elemento atualizado
-          return cy.get('div.text-truncate span.text-gray')
-            .contains('Total Balance:')
-            .parent('div.text-truncate')
-            .invoke('text')
-            .then((text) => {
-              const match = text.match(/Total Balance: ([\d,]+\.\d+) TUSD/);
-      
-              // Verifique se houve uma correspondência e se o valor é maior que zero
-              if (match) {
-                const balance = parseFloat(match[1].replace(',', '.')); // Substitui vírgula por ponto
-                return balance > 0;
-              }
-      
-              // Se não houver correspondência, continue esperando
-              return false;
-            });
-        }, { timeout: 10000, interval: 500 })
-          .then(() => {
-            // Agora que a condição foi atendida, você pode realizar ações adicionais
-            const value = this.createTaskValue();
-            cy.get(this.locator.inputTotalAmmount).type(value);
-            this.value = value;
-            cy.wait(2000);
-          });
-      }
+            // Use cy.get dentro do loop para obter o elemento atualizado
+            return cy.get('div.text-truncate span.text-gray')
+                .contains('Total Balance:')
+                .parent('div.text-truncate')
+                .invoke('text')
+                .then((text) => {
+                    const match = text.match(/Total Balance: ([\d,]+\.\d+) TUSD/);
 
-    approve() {
-        // cy.wait(5000)
-        cy.get(this.locator.btnApprove).wait(1500).click({force: true});
-        cy.confirmMetamaskPermissionToSpend(this.value);
+                    // Verifique se houve uma correspondência e se o valor é maior que zero
+                    if (match) {
+                        const balance = parseFloat(match[1].replace(',', '.')); // Substitui vírgula por ponto
+                        return balance > 0;
+                    }
+
+                    // Se não houver correspondência, continue esperando
+                    return false;
+                });
+        }, { timeout: 10000, interval: 500 })
+            .then(() => {
+                // Agora que a condição foi atendida, você pode realizar ações adicionais
+                const value = this.createTaskValue();
+                cy.get(this.locator.inputTotalAmmount).type(value);
+                this.value = value;
+            });
     }
 
     createTask() {
@@ -131,16 +124,16 @@ export default class Page {
 
         cy.get(this.locator.btn).contains(this.btnText.btnCode).click({ force: true });
         cy.get(this.locator.btnNext).click();
-        this.insertValue();
+        this.fillTaskValue();
 
-        cy.get(this.locator.btnNext).click();
-        this.approve();
+        cy.get(this.locator.btnNext).wait(2500).click();
+        cy.get(this.locator.btnApprove).wait(2000).click({ force: true });
+        cy.confirmMetamaskPermissionToSpend(this.value);
 
-        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask).wait(1500).click({ force: true });
+        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask, { timeout: 120000 }).wait(1500).click({ force: true });
         cy.confirmMetamaskTransaction();
-        
-    }
 
+    }
 
 
 }

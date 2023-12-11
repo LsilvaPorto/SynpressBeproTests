@@ -2,7 +2,8 @@ import Page from "../page";
 const { faker } = require('@faker-js/faker');
 export default class TaskPage extends Page {
     locator = {
-        statusTaskComponent: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div > div > span',
+        statusTaskComponent: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div',
+        statusDeliverableComponent: '#root-container > div.mt-3.pb-2.border-bottom.border-gray-850 > div > div > div > div > div:nth-child(2) > div.row.d-flex.flex-wrap.justify-content-between > div.col.d-flex.flex-wrap.align-items-center.mt-3 > div.my-2 > div',
         btn: 'button',
         btnStartWorking: '#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > button',
         btnCreateDeliverable: '#root-container > div.container-xl > div > div > div.mt-4 > div > div > div > div > div > div > button:contains("Create Deliverable")',
@@ -16,14 +17,26 @@ export default class TaskPage extends Page {
     }
     link = 'https://afrodite.bepro.network';
     waitTaskChangeStatusToOpen() {
-        cy.wait(75000);
+        cy.wait(60000);
         cy.reload();
+        cy.waitUntil(() => {
+            // Use cy.get dentro do loop para obter o elemento atualizado
+            return cy.get(this.locator.statusTaskComponent)
+                .invoke('text')
+                .then((text) => {
+                    cy.reload().then(() => {
+                        console.log(text);
+                        return text === 'open';
+                    });
+            
+                });
+        }, { timeout: 120000, interval: 5000 })
     }
 
     createDeliverable() {
-        //this.waitTaskChangeStatusToOpen();
+        this.waitTaskChangeStatusToOpen();
         // Encontre o botão pelo seu texto
-        cy.get(this.locator.btnStartWorking).invoke('text').then(($buttonText) => {
+        cy.get(this.locator.btn).invoke('text').then(($buttonText) => {
             if ($buttonText === 'Start Working') {
                 // O botão "Start Working" está presente, clique nele
                 cy.get(this.locator.btnStartWorking).click({ force: true });
