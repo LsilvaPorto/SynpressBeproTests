@@ -27,6 +27,6 @@ describe("connect wallet spec", () => {
     taskPage.createDeliverable();
     cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
     
-  });
+  }); 
 
 })
