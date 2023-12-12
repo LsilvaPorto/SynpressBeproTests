@@ -126,11 +126,11 @@ export default class Page {
         cy.get(this.locator.btnNext).click();
         this.fillTaskValue();
 
-        cy.get(this.locator.btnNext).wait(2500).click();
+        cy.get(this.locator.btnNext).wait(2500).click().wait(500);
         cy.get(this.locator.btnApprove).wait(2000).click({ force: true });
         cy.confirmMetamaskPermissionToSpend(this.value);
 
-        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask, { timeout: 120000 }).wait(1500).click({ force: true });
+        cy.get(this.locator.btn).contains(this.btnText.btnCreateTask, { timeout: 120000 }).wait(1500).click({ force: true });        
         cy.confirmMetamaskTransaction();
 
     }

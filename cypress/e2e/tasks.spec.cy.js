@@ -14,7 +14,7 @@ describe("connect wallet spec", () => {
   });
 
   it("should connect wallet with success", () => {
-    cy.get(locator.profileIcon).should('be.visible'); 
+    cy.get(locator.profileIcon).should('be.visible');
   });
 
   it("should create a task with success", () => {
@@ -24,13 +24,14 @@ describe("connect wallet spec", () => {
 
   it("should create a Delivery with success", () => {
     taskPage.createDeliverable();
-    // cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
-    
+    cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
+
   });
-  it("should create a Proposal with success", () => { 
+  it("should create a Proposal with success", () => {
     // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createProposal();
-    // cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
+    taskPage.acceptProposal();
+    cy.get('#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div > div:nth-child(1) > div.row.mb-2.proposal-progress-bar.align-items-center > div:nth-child(1) > h4', { timeout: 300000 }).contains('Accepted').should('be.visible');
   });
 
 })
