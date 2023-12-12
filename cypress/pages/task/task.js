@@ -26,7 +26,7 @@ export default class TaskPage extends Page {
                         console.log(text);
                         return text === 'open';
                     });
-            
+
                 });
         }, { timeout: 120000, interval: 5000 }).then(() => {
             console.log('Task status changed to open');
@@ -60,5 +60,10 @@ export default class TaskPage extends Page {
         cy.confirmMetamaskTransaction({ timeout: 60000 });
         cy.get(this.locator.btnMarkAsReady).wait(1000).click();
         cy.confirmMetamaskTransaction();
+    }
+
+    createProposal() {
+        cy.get(this.locator.btn).contains('Create Proposal').click({ force: true });
+        cy.get('.react-select__placeholder[placeholder="Select..."]').click({ force: true });
     }
 }
