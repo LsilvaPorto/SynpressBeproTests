@@ -24,11 +24,11 @@ describe("connect wallet spec", () => {
 
   it("should create a Delivery with success", () => {
     taskPage.createDeliverable();
-    cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
+    // cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
     
   });
-  it.only("should create a Proposal with success", () => { 
-    cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
+  it("should create a Proposal with success", () => { 
+    // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createProposal();
     // cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
   });

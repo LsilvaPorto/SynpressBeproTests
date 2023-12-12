@@ -59,11 +59,35 @@ export default class TaskPage extends Page {
         cy.get(this.locator.btnToFinishDeliverableCreation).wait(1000).click();
         cy.confirmMetamaskTransaction({ timeout: 60000 });
         cy.get(this.locator.btnMarkAsReady).wait(1000).click();
-        cy.confirmMetamaskTransaction();
+        cy.confirmMetamaskTransaction({ timeout: 60000}).then(() => {
+            cy.get('#root-container > div.mt-3.pb-2.border-bottom.border-gray-850 > div > div > div > div > div:nth-child(1) > div > div.me-2.cursor-pointer').click({ force: true });
+        });
     }
 
     createProposal() {
         cy.get(this.locator.btn).contains('Create Proposal').click({ force: true });
-        cy.get('.react-select__placeholder[placeholder="Select..."]').click({ force: true });
+        // cy.get('div.react-select__placeholder[placeholder="Select..."]').click({ force: true });react-select__placeholder
+        cy.contains('.react-select__placeholder', 'Select...').click({ force: true });
+        cy.get('.react-select__option:contains("code")').first().click({ force: true });
+        cy.get('#new-proposal-modal > div > div.row.mx-0.modal-footer > div > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none > span').click({ force: true });
+        cy.confirmMetamaskTransaction();
+        cy.get(this.locator.btn).contains('View Proposal').click({ force: true }).wait(1000);
+        
+        cy.waitUntil(() => {
+            // Use cy.get dentro do loop para obter o elemento atualizado
+            return cy.get('#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div')
+            .invoke('text')
+            .then((text) => {
+                cy.reload().then(() => {
+                    console.log(text);
+                    return text.includes('Accept');
+                });
+                
+            });
+        }, { timeout: 120000, interval: 5000 }).then(() => {
+            console.log('Task status changed to open');
+            cy.wait(1000);
+        })
+        cy.get(this.locator.btn).contains('Accept').click({ force: true });
     }
 }
