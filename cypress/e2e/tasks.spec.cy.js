@@ -1,9 +1,9 @@
 import Page from "../pages/page";
 import TaskPage from "../pages/task/task";
 const page = new Page();
-const locator = page.locator;
 const taskPage = new TaskPage();
-const taskLocator = taskPage.locator;
+const locator = page.commonPageLocator;
+const taskLocator = page.taskPageLocator;
 
 describe("create Task elements spec", () => {
   before(() => {
@@ -18,7 +18,7 @@ describe("create Task elements spec", () => {
   });
 
   it("should create a task successfully", () => {
-    page.createTask();
+    taskPage.createTask();
     cy.get(taskLocator.componentTaskStatus, { timeout: 300000 }).should('be.visible');
   });
 
@@ -31,7 +31,7 @@ describe("create Task elements spec", () => {
     // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createProposal();
     taskPage.acceptProposal();
-    cy.get(taskPage.locator.textStatusProposal, { timeout: 300000 }).contains('Accepted').should('be.visible');
+    cy.get(taskLocator.textStatusProposal, { timeout: 300000 }).contains('Accepted').should('be.visible');
   });
 
 })
