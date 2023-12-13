@@ -75,9 +75,9 @@ export default class TaskPage extends Page {
     }
 
     createTask() {
-        cy.get(this.commonPageLocator.btn).contains('Create').click();
+        cy.contains('Create').click();
         cy.get(this.commonPageLocator.spanCreateTask).click();
-        cy.get(this.commonPageLocator.btn).contains('Continue').click();
+        cy.contains('Continue').click();
         cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
 
         this.selectMarketplace();
@@ -85,7 +85,7 @@ export default class TaskPage extends Page {
         this.fillTaskDescription();
         this.insertTag();
 
-        cy.get(this.commonPageLocator.btn).contains(this.btnText.btnCode).click({ force: true });
+        cy.contains(this.btnText.btnCode).click({ force: true });
         cy.get(this.commonPageLocator.btnNext).click().wait(1000);
         this.fillTaskValue();
 
@@ -93,7 +93,7 @@ export default class TaskPage extends Page {
         cy.get(this.commonPageLocator.btnApprove).wait(1000).click({ force: true });
         cy.confirmMetamaskPermissionToSpend(this.value);
 
-        cy.get(this.commonPageLocator.btn).contains(this.btnText.createTask, { timeout: 120000 }).wait(1000).click({ force: true });
+        cy.contains(this.btnText.createTask, { timeout: 120000 }).wait(1000).click({ force: true });
         // cy.confirmMetamaskTransaction();
         cy.confirmMetamaskPermissionToSpend(0);
 
@@ -112,13 +112,11 @@ export default class TaskPage extends Page {
                             cy.log(text);
                             return text === 'open';
                         });
-
                     }
-
                 });
         }, { timeout: 120000, interval: 10000 }).then(() => {
             cy.log('Task status changed to open');
-            cy.wait(2000);
+            cy.wait(1000);
         })
     }
 
@@ -129,14 +127,14 @@ export default class TaskPage extends Page {
             cy.log($buttonText);
             if ($buttonText.includes('Start Working')) {
                 // O botão "Start Working" está presente, clique nele
-                cy.get(this.taskPageLocator.btn).contains('Start Working').wait(500).click({ force: true }).wait(2000);
+                cy.contains('Start Working').wait(500).click({ force: true }).wait(1000);
 
                 // Agora, clique no botão "Create Deliverable"
-                cy.get(this.taskPageLocator.btn).contains('Create Deliverable').wait(1000).click({ force: true }).wait(500);
+                cy.contains('Create Deliverable').wait(1000).click({ force: true }).wait(500);
             } else {
                 // O botão "Start Working" não está presente, clique diretamente no botão "Create Deliverable"
                 cy.log('Start Working button not present, clicking Create Deliverable directly');
-                cy.get(this.taskPageLocator.btn).contains('Create Deliverable').wait(500).click({ force: true });
+                cy.contains('Create Deliverable').wait(500).click({ force: true });
             }
         });
 
@@ -146,13 +144,13 @@ export default class TaskPage extends Page {
         cy.get(this.taskPageLocator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
         cy.get(this.taskPageLocator.btn, { timeout: 60 }).contains('Create Deliverable').wait(1000).click();
         cy.confirmMetamaskTransaction();
-        cy.get(this.taskPageLocator.btn).contains("Mark as ready").wait(1000).click();
+        cy.contains("Mark as ready").wait(1000).click();
         cy.confirmMetamaskTransaction()
         cy.get(this.taskPageLocator.btnArrowBackFromDeliverable, { timeout: 60000 }).wait(1000).click({ force: true });
     }
 
     createProposal() {
-        cy.get(this.taskPageLocator.btn).contains('Create Proposal').click({ force: true });
+        cy.contains('Create Proposal').click({ force: true });
         cy.contains(this.taskPageLocator.dropdownProposal, 'Select...').click({ force: true });
         cy.get(this.taskPageLocator.dropdownOptionProposal).first().click({ force: true });
         cy.get(this.taskPageLocator.btnFinishProposalCreation).click({ force: true });
@@ -161,7 +159,7 @@ export default class TaskPage extends Page {
     }
 
     acceptProposal() {
-        cy.get(this.taskPageLocator.btn, { timeout: 60000 }).contains('View Proposal').click({ force: true }).wait(1000);
+        cy.contains('View Proposal', { timeout: 60000 }).click({ force: true }).wait(1000);
 
         cy.waitUntil(() => {
             cy.wait(3000);
@@ -181,8 +179,8 @@ export default class TaskPage extends Page {
             cy.log('Task status changed to open');
             cy.wait(1000);
         })
-        cy.get(this.taskPageLocator.btn).contains('Accept').wait(3000).click({ force: true });
-        cy.get(this.taskPageLocator.btn).contains('Confirm Distribution', { timeout: 120000 }).click({ force: true });
+        cy.contains('Accept').wait(3000).click({ force: true });
+        cy.contains('Confirm Distribution', { timeout: 120000 }).wait(2000).click({ force: true });
         cy.confirmMetamaskTransaction();
     }
 }

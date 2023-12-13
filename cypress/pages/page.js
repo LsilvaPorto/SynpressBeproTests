@@ -3,7 +3,6 @@ export default class Page {
 
     commonPageLocator = {
         btnAcceptCookies: "#rcc-confirm-button",
-        btn: "button",
         btnCreate: '.gap-3 > .read-only-wrapper > .multi-action-button > #multiAction > .react-select__control',
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
         spanCreateTask: 'span:contains("Launch in Open Marketplace")',
@@ -25,13 +24,13 @@ export default class Page {
         inputDeliverableTitle: ':nth-child(3) > .col-md-12 > .form-group > .form-control',
         inputDeliverableDescription: '.p-1 > .form-control',
         imgPreviewLinkDeliverable: 'img[src="https://afrodite.bepro.network/images/meta-thumbnail.jpeg"].border-radius-8',
-        btn: 'button',
         btnFinishProposalCreation: '#new-proposal-modal > div > div.row.mx-0.modal-footer > div > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none',
         btnArrowBackFromDeliverable: '#root-container > div.mt-3.pb-2.border-bottom.border-gray-850 > div > div > div > div > div:nth-child(1) > div > div.me-2.cursor-pointer',
         textStatusProposal: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div > div:nth-child(1) > div.row.mb-2.proposal-progress-bar.align-items-center > div:nth-child(1) > h4',
         dropdownProposal: '.react-select__placeholder',
         dropdownOptionProposal: '.react-select__option:contains("code")',
         componentProposalstatus: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div',
+        btn: 'button',
     }
 
     btnText = {
@@ -46,9 +45,9 @@ export default class Page {
     }
 
     connectWallet() {
-        cy.get(this.commonPageLocator.btn).contains('Connect Wallet').click();
+        cy.contains('Connect Wallet').click();
         cy.acceptMetamaskAccess();
-        cy.get(this.commonPageLocator.btn).contains('Connect Wallet').click();
+        cy.contains('Connect Wallet').click();
         cy.confirmMetamaskDataSignatureRequest();
     }
 }
