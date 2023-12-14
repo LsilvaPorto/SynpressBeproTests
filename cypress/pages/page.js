@@ -1,6 +1,5 @@
-import 'cypress-wait-until';
 export default class Page {
-
+    
     commonPageLocator = {
         btnAcceptCookies: "#rcc-confirm-button",
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
