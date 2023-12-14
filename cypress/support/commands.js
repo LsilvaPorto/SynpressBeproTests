@@ -26,9 +26,20 @@
 import Page from "../pages/page";
 const page = new Page();
 
-Cypress.Commands.add('connectWallet', () => {
-    cy.contains(page.elementText.btnConnectWallet).click();
+Cypress.Commands.add('connectWalletFirstTime', () => {
+    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
     cy.acceptMetamaskAccess();
-    cy.contains(page.elementText.btnConnectWallet).click();
+    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
     cy.confirmMetamaskDataSignatureRequest();
+})
+
+Cypress.Commands.add('connectWallet', () => {
+    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
+    cy.confirmMetamaskDataSignatureRequest();
+})
+
+Cypress.Commands.add('openMenuToCreate', (element) => {
+    cy.contains(page.elementText.btnCreate).click();
+    cy.contains(element).click();
+    cy.contains(page.elementText.btnContinue).click();
 })

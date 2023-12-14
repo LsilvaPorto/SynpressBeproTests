@@ -4,11 +4,6 @@ export default class TaskPage extends Page {
     link = 'https://afrodite.bepro.network';
     value = null;
 
-    createMarketplaceName() {
-        const mp = faker.company.name();
-        return mp.toString();
-    }
-
     createTaskTitle() {
         const task = faker.lorem.words(5);
         return task.toString();
@@ -75,9 +70,8 @@ export default class TaskPage extends Page {
     }
 
     createTask() {
-        cy.contains(this.elementText.btnCreate).click();
-        cy.get(this.commonPageLocator.spanCreateTask).click();
-        cy.contains(this.elementText.btnContinue).click();
+        cy.openMenuToCreate(this.elementText.textCreateTask);
+
         cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
 
         this.selectMarketplace();

@@ -3,7 +3,6 @@ export default class Page {
     commonPageLocator = {
         btnAcceptCookies: "#rcc-confirm-button",
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
-        spanCreateTask: 'span:contains("Launch in Open Marketplace")',
         btnApprove: ':nth-child(2) > .justify-content-end > .row.justify-content-center > .col-xs-12 > .d-none > .pe-2 > .btn',
         inputMarketPlaceSelect: "#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div > div.select-network-dropdown.w-max-none > div > div",
         beproMarketSelect: ".react-select__option",
@@ -51,5 +50,7 @@ export default class Page {
         btnAcceptProposal: 'Accept',
         btnConfirmDistribution: 'Confirm Distribution',
         textAccepted: 'Accepted',
+        textCreateMarketplace: 'Create Your Marketplace',
+        textCreateTask: 'Launch in Open Marketplace',
     }
 }
