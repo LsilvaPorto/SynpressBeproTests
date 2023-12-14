@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import Page from "../pages/page";
+const page = new Page();
+
+Cypress.Commands.add('connectWallet', () => {
+    cy.contains(page.elementText.btnConnectWallet).click();
+    cy.acceptMetamaskAccess();
+    cy.contains(page.elementText.btnConnectWallet).click();
+    cy.confirmMetamaskDataSignatureRequest();
+})

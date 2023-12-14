@@ -3,7 +3,6 @@ export default class Page {
 
     commonPageLocator = {
         btnAcceptCookies: "#rcc-confirm-button",
-        btnCreate: '.gap-3 > .read-only-wrapper > .multi-action-button > #multiAction > .react-select__control',
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
         spanCreateTask: 'span:contains("Launch in Open Marketplace")',
         btnApprove: ':nth-child(2) > .justify-content-end > .row.justify-content-center > .col-xs-12 > .d-none > .pe-2 > .btn',
@@ -18,8 +17,8 @@ export default class Page {
     };
 
     taskPageLocator = {
+        btn: 'button',
         componentTaskStatus: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div',
-        statusDeliverableComponent: '#root-container > div.mt-3.pb-2.border-bottom.border-gray-850 > div > div > div > div > div:nth-child(2) > div.row.d-flex.flex-wrap.justify-content-between > div.col.d-flex.flex-wrap.align-items-center.mt-3 > div.my-2 > div',
         inputDeliverableLink: ':nth-child(1) > .col-md-12 > .form-group > .form-control',
         inputDeliverableTitle: ':nth-child(3) > .col-md-12 > .form-group > .form-control',
         inputDeliverableDescription: '.p-1 > .form-control',
@@ -28,12 +27,12 @@ export default class Page {
         btnArrowBackFromDeliverable: '#root-container > div.mt-3.pb-2.border-bottom.border-gray-850 > div > div > div > div > div:nth-child(1) > div > div.me-2.cursor-pointer',
         textStatusProposal: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div > div:nth-child(1) > div.row.mb-2.proposal-progress-bar.align-items-center > div:nth-child(1) > h4',
         dropdownProposal: '.react-select__placeholder',
+        placeholderProposal: 'Select...',
         dropdownOptionProposal: '.react-select__option:contains("code")',
         componentProposalstatus: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div',
-        btn: 'button',
     }
 
-    btnText = {
+    elementText = {
         btnCode: 'Code',
         btnDesign: 'Design',
         btnOther: 'Other',
@@ -42,12 +41,16 @@ export default class Page {
         btnConnectWallet: 'Connect Wallet',
         btnBepro: 'bepro',
         btnTask: 'Task',
-    }
-
-    connectWallet() {
-        cy.contains('Connect Wallet').click();
-        cy.acceptMetamaskAccess();
-        cy.contains('Connect Wallet').click();
-        cy.confirmMetamaskDataSignatureRequest();
+        btnCreate: 'Create',
+        btnContinue: 'Continue',
+        btnStartWorking: 'Start Working',
+        btnCreateDeliverable: 'Create Deliverable',
+        btnMarkAsReady: 'Mark as ready',
+        btnMakeAReview: 'Make a Review',
+        btnCreateProposal: 'Create Proposal',
+        btnViewProposal: 'View Proposal',
+        btnAcceptProposal: 'Accept',
+        btnConfirmDistribution: 'Confirm Distribution',
+        textAccepted: 'Accepted',
     }
 }

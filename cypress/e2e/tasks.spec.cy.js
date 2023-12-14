@@ -7,10 +7,10 @@ const taskLocator = page.taskPageLocator;
 
 describe("create Task elements spec", () => {
   before(() => {
-    cy.visit('/').then(() => {
+    cy.visit('', {timeout:60000}).then(() => {
       cy.get(locator.btnAcceptCookies).click();
     })
-    page.connectWallet();
+    cy.connectWallet();
   });
 
   it("should connect wallet successfully", () => {
@@ -23,15 +23,16 @@ describe("create Task elements spec", () => {
   });
 
   it("should create a Delivery successfully", () => {
+    // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createDeliverable();
-    cy.get(taskLocator.btn, { timeout: 300000 }).contains('Make a Review').should('be.visible');
+    cy.contains(page.elementText.btnMakeAReview, { timeout: 300000 }).should('be.visible');
 
   });
   it("should create a Proposal successfully", () => {
-    // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
+    //cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.d-none.d-xl-flex').click({ force: true })
     taskPage.createProposal();
     taskPage.acceptProposal();
-    cy.get(taskLocator.textStatusProposal, { timeout: 300000 }).contains('Accepted').should('be.visible');
+    cy.contains(page.elementText.textAccepted, { timeout: 300000 }).should('be.visible');
   });
 
 })
