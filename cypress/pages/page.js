@@ -30,6 +30,12 @@ export default class Page {
         componentProposalstatus: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div',
     }
 
+    marketplacePageLocator = {
+        elementAfterNANInMarketplace: '0%',
+        marketplaceValueToApprove: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-between.caption-large.mb-3.amount-input > div:nth-child(2) > span',
+
+    }
+
     elementText = {
         btnCode: 'Code',
         btnDesign: 'Design',
@@ -52,5 +58,13 @@ export default class Page {
         textAccepted: 'Accepted',
         textCreateMarketplace: 'Create Your Marketplace',
         textCreateTask: 'Launch in Open Marketplace',
+        btnMax: 'Max',
+        btnLock: 'Lock TBEPRO',
+        btnNextStep: 'Next Step',
+        btnUploadLogoIcon: 'logo icon',
+        btnUploadFullLogo: 'upload full logo',
+        placeholderMarketplaceName: 'Marketplace name',
+        placeholderMarketplaceDescription: 'Type a description...',
+
     }
 }

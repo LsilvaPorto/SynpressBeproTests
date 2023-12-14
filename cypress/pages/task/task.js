@@ -8,7 +8,7 @@ export default class TaskPage extends Page {
         const task = faker.lorem.words(5);
         return task.toString();
     }
-
+    //this method will be replaced for cy.createDescription()
     createTaskDescription() {
         const description = faker.lorem.paragraphs(2, '<br/>\n');
         return description.toString();
@@ -71,7 +71,6 @@ export default class TaskPage extends Page {
 
     createTask() {
         cy.openMenuToCreate(this.elementText.textCreateTask);
-
         cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
 
         this.selectMarketplace();

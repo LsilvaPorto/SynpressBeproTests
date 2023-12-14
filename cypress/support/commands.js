@@ -24,6 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import Page from "../pages/page";
+const { faker } = require('@faker-js/faker');
 const page = new Page();
 
 Cypress.Commands.add('connectWalletFirstTime', () => {
@@ -31,15 +32,21 @@ Cypress.Commands.add('connectWalletFirstTime', () => {
     cy.acceptMetamaskAccess();
     cy.contains(page.elementText.btnConnectWallet).wait(500).click();
     cy.confirmMetamaskDataSignatureRequest();
-})
+});
 
 Cypress.Commands.add('connectWallet', () => {
     cy.contains(page.elementText.btnConnectWallet).wait(500).click();
     cy.confirmMetamaskDataSignatureRequest();
-})
+});
 
-Cypress.Commands.add('openMenuToCreate', (element) => {
+Cypress.Commands.add('openMenuToCreate', () => {
     cy.contains(page.elementText.btnCreate).click();
     cy.contains(element).click();
-    cy.contains(page.elementText.btnContinue).click();
-})
+    cy.contains(page.elementText.btnContinue).wait(1000).click().wait(1000);
+});
+
+
+Cypress.Commands.add('createDescription', () => {
+    const description = faker.lorem.paragraphs(2, '<br/>\n');
+    return description.toString();
+});
