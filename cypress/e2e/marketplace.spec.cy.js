@@ -18,7 +18,7 @@ describe("create Marketplace spec", () => {
         // cy.get(marketplaceLocator.componentMarketplace, { timeout: 300000 }).should('be.visible');
     });
 
-    it.only("should close a Marketplace successfully", () => {
+    it("should close a Marketplace successfully", () => {
 
     });
 });
