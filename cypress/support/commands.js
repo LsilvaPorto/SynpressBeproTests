@@ -39,7 +39,7 @@ Cypress.Commands.add('connectWallet', () => {
     cy.confirmMetamaskDataSignatureRequest();
 });
 
-Cypress.Commands.add('openMenuToCreate', () => {
+Cypress.Commands.add('openMenuToCreate', (element) => {
     cy.contains(page.elementText.btnCreate).click();
     cy.contains(element).click();
     cy.contains(page.elementText.btnContinue).wait(1000).click().wait(1000);

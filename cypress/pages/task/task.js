@@ -116,7 +116,7 @@ export default class TaskPage extends Page {
     createDeliverable() {
         this.waitTaskChangeStatusToOpen();
         // Encontre o botão pelo seu texto
-        cy.get(this.taskPageLocator.btn).invoke('text').then(($buttonText) => {
+        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
             cy.log($buttonText);
             if ($buttonText.includes(this.elementText.btnStartWorking)) {
                 // O botão "Start Working" está presente, clique nele

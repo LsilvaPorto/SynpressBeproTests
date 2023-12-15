@@ -1,6 +1,7 @@
 export default class Page {
     
     commonPageLocator = {
+        btn: 'button',
         btnAcceptCookies: "#rcc-confirm-button",
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
         btnApprove: ':nth-child(2) > .justify-content-end > .row.justify-content-center > .col-xs-12 > .d-none > .pe-2 > .btn',
@@ -15,7 +16,6 @@ export default class Page {
     };
 
     taskPageLocator = {
-        btn: 'button',
         componentTaskStatus: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div',
         inputDeliverableLink: ':nth-child(1) > .col-md-12 > .form-group > .form-control',
         inputDeliverableTitle: ':nth-child(3) > .col-md-12 > .form-group > .form-control',
