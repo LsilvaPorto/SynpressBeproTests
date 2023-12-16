@@ -20,6 +20,6 @@ describe("create Marketplace spec", () => {
     });
 
     it("should close a Marketplace successfully", () => {
-
+        marketplacePage.closeMarketplace();
     });
 });

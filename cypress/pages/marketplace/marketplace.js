@@ -78,4 +78,13 @@ export default class MarketplacePage extends Page {
         cy.confirmMetamaskTransaction();
 
     }
+
+    closeMarketplace() {
+        cy.get(this.commonPageLocator.profileIcon).click();
+        cy.contains('Governance').click();
+        cy.contains('Close marketplace').click();
+        cy.confirmMetamaskDataSignatureRequest();
+        cy.confirmMetamaskTransaction();
+    }
+
 }
