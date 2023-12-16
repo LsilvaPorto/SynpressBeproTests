@@ -5,12 +5,13 @@
   "license": "MIT",
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
-    "@synthetixio/synpress": "^3.5.1",
-    "cypress": "^12.7.0",
+    "@synthetixio/synpress": "^3.7.1",
+    "cypress": "^12.11.0",
+    "cypress-file-upload": "^5.0.8",
     "env-cmd": "^10.1.0"
   },
   "scripts": {
-    "test": "env-cmd -f .env cypress run --browser chrome --headed --no-exit"
+    "test": "env-cmd -f .env cypress run --browser chrome --headed --spec 'cypress/e2e/marketplace.spec.cy.js' --no-exit"
   },
   "dependencies": {
     "cypress-wait-until": "^3.0.1"

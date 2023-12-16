@@ -4,16 +4,11 @@ export default class TaskPage extends Page {
     link = 'https://afrodite.bepro.network';
     value = null;
 
-    createMarketplaceName() {
-        const mp = faker.company.name();
-        return mp.toString();
-    }
-
     createTaskTitle() {
         const task = faker.lorem.words(5);
         return task.toString();
     }
-
+    //this method will be replaced for cy.createDescription()
     createTaskDescription() {
         const description = faker.lorem.paragraphs(2, '<br/>\n');
         return description.toString();
@@ -75,9 +70,7 @@ export default class TaskPage extends Page {
     }
 
     createTask() {
-        cy.contains(this.elementText.btnCreate).click();
-        cy.get(this.commonPageLocator.spanCreateTask).click();
-        cy.contains(this.elementText.btnContinue).click();
+        cy.openMenuToCreate(this.elementText.textCreateTask);
         cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
 
         this.selectMarketplace();
@@ -123,7 +116,7 @@ export default class TaskPage extends Page {
     createDeliverable() {
         this.waitTaskChangeStatusToOpen();
         // Encontre o botão pelo seu texto
-        cy.get(this.taskPageLocator.btn).invoke('text').then(($buttonText) => {
+        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
             cy.log($buttonText);
             if ($buttonText.includes(this.elementText.btnStartWorking)) {
                 // O botão "Start Working" está presente, clique nele

@@ -8,7 +8,8 @@ describe("create Task elements spec", () => {
     cy.visit('', {timeout:60000}).then(() => {
       cy.get(locator.btnAcceptCookies).click();
     })
-    cy.connectWallet();
+    // cy.connectWallet();
+    cy.connectWalletFirstTime();
   });
 
   it("should connect wallet successfully", () => {

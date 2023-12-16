@@ -1,9 +1,9 @@
 export default class Page {
     
     commonPageLocator = {
+        btn: 'button',
         btnAcceptCookies: "#rcc-confirm-button",
         profileIcon: "#__next > div > div.nav-container > div > div > div.d-flex.flex-row.align-items-center.gap-3 > div:nth-child(2) > div > div",
-        spanCreateTask: 'span:contains("Launch in Open Marketplace")',
         btnApprove: ':nth-child(2) > .justify-content-end > .row.justify-content-center > .col-xs-12 > .d-none > .pe-2 > .btn',
         inputMarketPlaceSelect: "#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div > div.select-network-dropdown.w-max-none > div > div",
         beproMarketSelect: ".react-select__option",
@@ -16,7 +16,6 @@ export default class Page {
     };
 
     taskPageLocator = {
-        btn: 'button',
         componentTaskStatus: '#root-container > div.mt-2.border-bottom.border-gray-850.pb > div > div > div > div > div > div.row.align-items-center.flex-wrap.border-top.border-gray-850.mt-3.pt-3 > div:nth-child(1) > div',
         inputDeliverableLink: ':nth-child(1) > .col-md-12 > .form-group > .form-control',
         inputDeliverableTitle: ':nth-child(3) > .col-md-12 > .form-group > .form-control',
@@ -29,6 +28,26 @@ export default class Page {
         placeholderProposal: 'Select...',
         dropdownOptionProposal: '.react-select__option:contains("code")',
         componentProposalstatus: '#root-container > div.container-xl > div > div > div.mt-3.row.justify-content-between > div:nth-child(2) > div',
+    }
+
+    marketplacePageLocator = {
+        elementAfterNANInMarketplace: '0%',
+        marketplaceValueToApprove: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-between.caption-large.mb-3.amount-input > div:nth-child(2) > span',
+        btnLockTBepro:'#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-center.mt-4.pt-3 > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none > span',
+        logoIcon: '#logoIcon',
+        fullLogo: '#fullLogo',
+        inputMarketplaceName: '#display-name',
+        inputMarketplaceDescription: '#description',
+        btnNextStep2: '#root-container > div > div > div > div > div > div > div > div:nth-child(2) > div.collapse.show > div.d-flex.flex-row.justify-content-center > button',
+        btnNextStep3: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.d-flex.flex-row.justify-content-center > button',
+        inputDisputeTime: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.row.pt-2 > div:nth-child(2) > div.row.mt-2.gy-3 > div:nth-child(1) > div > div > input',
+        inputDraftTime: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.row.pt-2 > div:nth-child(2) > div.row.mt-2.gy-3 > div:nth-child(3) > div > div > input',
+        inputCuratorAmount: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.row.pt-2 > div:nth-child(2) > div.row.mt-2.gy-3 > div:nth-child(4) > div > div > input',
+        dropdownTransactionalTokens: '#root-container > div > div > div > div > div > div > div > div:nth-child(4) > div.collapse.show > div.row.pt-2 > div:nth-child(3) > div > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
+        beproTransactionalTokens: '#react-select-2-option-1',
+        dropdownRewardTokens: '#root-container > div > div > div > div > div > div > div > div:nth-child(4) > div.collapse.show > div.row.pt-2 > div:nth-child(4) > div > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
+        beproRewardTokens: '#react-select-3-option-1',
+
     }
 
     elementText = {
@@ -51,5 +70,16 @@ export default class Page {
         btnAcceptProposal: 'Accept',
         btnConfirmDistribution: 'Confirm Distribution',
         textAccepted: 'Accepted',
+        textCreateMarketplace: 'Create Your Marketplace',
+        textCreateTask: 'Launch in Open Marketplace',
+        btnMax: 'Max',
+        btnLock: 'Lock TBEPRO',
+        btnNextStep: 'Next Step',
+        btnUploadLogoIcon: 'logo icon',
+        btnUploadFullLogo: 'upload full logo',
+        placeholderMarketplaceName: 'Marketplace name',
+        placeholderMarketplaceDescription: 'Type a description...',
+        btnCreateMarketplace: 'Create Marketplace'
+
     }
 }
