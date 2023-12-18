@@ -7,7 +7,7 @@ export default class MarketplacePage extends Page {
         return mp.toString();
     }
 
-    uploadLogoIco(){
+    uploadLogoIco() {
         cy.fixture('Bepro-ico.svg').then(fileContent => {
             cy.get(this.marketplacePageLocator.logoIcon).attachFile({
                 fileContent: fileContent.toString(),
@@ -17,7 +17,7 @@ export default class MarketplacePage extends Page {
         });
     }
 
-    uploadFullLogo(){
+    uploadFullLogo() {
         cy.fixture('Bepro-logo.svg').then(fileContent => {
             cy.get(this.marketplacePageLocator.fullLogo).attachFile({
                 fileContent: fileContent.toString(),
@@ -62,7 +62,7 @@ export default class MarketplacePage extends Page {
         cy.get(this.marketplacePageLocator.beproRewardTokens).click();
 
         cy.contains(this.elementText.btnCreateMarketplace).click();
-        
+
         //all confirmation to create network 
         cy.confirmMetamaskDataSignatureRequest();
         cy.confirmMetamaskPermissionToSpend().wait(35000);
@@ -85,6 +85,20 @@ export default class MarketplacePage extends Page {
         cy.confirmMetamaskTransaction().wait(10000);
         cy.confirmMetamaskDataSignatureRequest();
         cy.reload();
+    }
+
+    waitFordataToLoad() {
+        cy.get(this.managementPageLocator.inputDraftTime).wait(3000)
+            .invoke('val')
+            .then((value) => {
+                const valorNumerico = parseFloat(value);
+                if (valorNumerico > 0) {
+                    cy.wait(100);
+                } else {
+                    cy.wait(2000);
+                    this.waitFordataToLoad();
+                }
+        })
     }
 
 }

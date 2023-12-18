@@ -50,6 +50,16 @@ export default class Page {
 
     }
 
+    managementPageLocator = {
+        inputDisputeTime: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(1) > div > div > input',
+        inputPercentageForDispute: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(2) > div > div > input',
+        inputDraftTime: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(3) > div > div > input',
+        inputCuratorAmount: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(4) > div > div > input',
+        inputMergerFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(7) > div > div > input',
+        inputProposalCreatorFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(8) > div > div > input',
+        
+    }
+
     elementText = {
         btnCode: 'Code',
         btnDesign: 'Design',
@@ -83,6 +93,6 @@ export default class Page {
         btnCustomMarketplace: 'Custom Marketplace',
         tabGovernance: 'Governance',
         btnCloseMarketplace: 'Close marketplace',
-
+        btnSaveChanges: 'Save Changes',
     }
 }
