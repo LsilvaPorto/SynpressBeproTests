@@ -79,7 +79,10 @@ export default class Page {
         btnUploadFullLogo: 'upload full logo',
         placeholderMarketplaceName: 'Marketplace name',
         placeholderMarketplaceDescription: 'Type a description...',
-        btnCreateMarketplace: 'Create Marketplace'
+        btnCreateMarketplace: 'Create Marketplace',
+        btnCustomMarketplace: 'Custom Marketplace',
+        tabGovernance: 'Governance',
+        btnCloseMarketplace: 'Close marketplace',
 
     }
 }

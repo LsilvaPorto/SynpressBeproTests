@@ -7,8 +7,9 @@ module.exports = defineConfig({
   defaultCommandTimeout: 30000,
   viewportWidth: 1688,
   viewportHeight: 768,
-  pageLoadTimeout: 60000,
-  requestTimeout: 30000,
+  pageLoadTimeout: 120000,
+  requestTimeout: 120000,
+  defaultCommandTimeout: 300000,
   e2e: {
     testIsolation: false,
     setupNodeEvents(on, config) {

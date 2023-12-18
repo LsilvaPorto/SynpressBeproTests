@@ -86,9 +86,9 @@ export default class TaskPage extends Page {
         cy.get(this.commonPageLocator.btnApprove).scrollIntoView().wait(1000).click({ force: true });
         cy.confirmMetamaskPermissionToSpend(this.value);
 
-        cy.contains(this.elementText.createTask, { timeout: 120000 }).wait(1000).click({ force: true });
+        cy.contains(this.elementText.createTask).wait(1000).click({ force: true });
         // cy.confirmMetamaskTransaction();
-        cy.confirmMetamaskPermissionToSpend(0);
+        cy.confirmMetamaskPermissionToSpend();
 
     }
 
@@ -132,7 +132,7 @@ export default class TaskPage extends Page {
         });
 
         cy.get(this.taskPageLocator.inputDeliverableLink).type(this.link, { force: true });
-        cy.get(this.taskPageLocator.imgPreviewLinkDeliverable, { timeout: 60000 }).should('be.visible');
+        cy.get(this.taskPageLocator.imgPreviewLinkDeliverable).should('be.visible');
         cy.get(this.taskPageLocator.inputDeliverableTitle).type(this.createTaskTitle(), { force: true });
         cy.get(this.taskPageLocator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
         cy.contains(this.taskPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().wait(1000).click();
@@ -140,7 +140,7 @@ export default class TaskPage extends Page {
         cy.confirmMetamaskTransaction();
         cy.contains(this.elementText.btnMarkAsReady).wait(1000).click();
         cy.confirmMetamaskTransaction()
-        cy.get(this.taskPageLocator.btnArrowBackFromDeliverable, { timeout: 60000 }).wait(1000).click({ force: true });
+        cy.get(this.taskPageLocator.btnArrowBackFromDeliverable).wait(1000).click({ force: true });
     }
 
     createProposal() {
@@ -153,7 +153,7 @@ export default class TaskPage extends Page {
     }
 
     acceptProposal() {
-        cy.contains(this.elementText.btnViewProposal, { timeout: 60000 }).click({ force: true }).wait(1000);
+        cy.contains(this.elementText.btnViewProposal).click({ force: true }).wait(1000);
 
         cy.waitUntil(() => {
             cy.wait(3000);
@@ -174,7 +174,7 @@ export default class TaskPage extends Page {
             cy.contains(this.elementText.btnAcceptProposal).wait(3000).click({ force: true });
             cy.wait(1000);
         })
-        cy.contains(this.elementText.btnConfirmDistribution, { timeout: 120000 }).wait(2000).click({ force: true });
+        cy.contains(this.elementText.btnConfirmDistribution).wait(2000).click({ force: true });
         cy.confirmMetamaskTransaction();
     }
 }

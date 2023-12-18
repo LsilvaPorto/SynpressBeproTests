@@ -4,7 +4,7 @@ const locator = marketplacePage.commonPageLocator;
 const marketplaceLocator = marketplacePage.marketplacePageLocator;
 describe("create Marketplace spec", () => {
     before(() => {
-        cy.visit('', { timeout: 60000 }).then(() => {
+        cy.visit('').then(() => {
             cy.get(locator.btnAcceptCookies).click();
         })
         
@@ -16,10 +16,11 @@ describe("create Marketplace spec", () => {
 
     it("should create a Marketplace successfully", () => {
         marketplacePage.createMarketplace();
-        cy.contains('Create one', { timeout: 300000 }).should('be.visible');
+        cy.contains('Create one').should('be.visible');
     });
 
     it("should close a Marketplace successfully", () => {
         marketplacePage.closeMarketplace();
+        cy.contains("You don't have a custom marketplace created").should('be.visible');
     });
 });
