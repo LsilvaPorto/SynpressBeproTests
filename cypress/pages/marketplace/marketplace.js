@@ -87,8 +87,8 @@ export default class MarketplacePage extends Page {
         cy.reload();
     }
 
-    waitFordataToLoad() {
-        cy.get(this.managementPageLocator.inputDraftTime).wait(3000)
+    waitFordataToLoad(locator) {
+        cy.get(locator)
             .invoke('val')
             .then((value) => {
                 const valorNumerico = parseFloat(value);
@@ -96,9 +96,20 @@ export default class MarketplacePage extends Page {
                     cy.wait(100);
                 } else {
                     cy.wait(2000);
-                    this.waitFordataToLoad();
+                    this.waitFordataToLoad(locator);
                 }
         })
+    }
+
+    setMarketplaceConfig(tab, configToChange, valueToChange){
+        const locatorToWait = configToChange;
+        cy.contains(tab).click();
+        this.waitFordataToLoad(locatorToWait);
+        cy.get(configToChange).clear().type(valueToChange).wait(1000);
+        cy.contains(this.elementText.btnSaveChanges).click();
+        cy.confirmMetamaskPermissionToSpend();
+        cy.get(this.managementPageLocator.toastySuccess).should('exist').reload();
+        cy.contains(tab).click();
     }
 
 }

@@ -1,5 +1,5 @@
 export default class Page {
-    
+
     commonPageLocator = {
         btn: 'button',
         btnAcceptCookies: "#rcc-confirm-button",
@@ -33,7 +33,7 @@ export default class Page {
     marketplacePageLocator = {
         elementAfterNANInMarketplace: '0%',
         marketplaceValueToApprove: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-between.caption-large.mb-3.amount-input > div:nth-child(2) > span',
-        btnLockTBepro:'#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-center.mt-4.pt-3 > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none > span',
+        btnLockTBepro: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-center.mt-4.pt-3 > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none > span',
         logoIcon: '#logoIcon',
         fullLogo: '#fullLogo',
         inputMarketplaceName: '#display-name',
@@ -57,7 +57,14 @@ export default class Page {
         inputCuratorAmount: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(4) > div > div > input',
         inputMergerFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(7) > div > div > input',
         inputProposalCreatorFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div:nth-child(5) > div > div:nth-child(8) > div > div > input',
-        
+        inputCancelFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(1) > div > div > input',
+        inputCloseFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(2) > div > div > input',
+        inputMarketplaceCreationFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(3) > div > div > input',
+        inputCloseFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(2) > div > div > input',
+        inputMarketplaceCreationAmount: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(4) > div > div > input',
+        toastySuccess: '#__next > div > div.toast-container > div > div.toast-header.border-bottom-0.bg-transparent.px-3 > strong:contains("Success")',
+        inputBlockListDomains: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div:nth-child(3) > div > div.d-flex.flex-column.my-4 > div.d-flex.align-items-center.flex-wrap.mb-4 > div.col-xl-5.col-md-6.col-12 > div > input',
+    
     }
 
     elementText = {
@@ -92,7 +99,12 @@ export default class Page {
         btnCreateMarketplace: 'Create Marketplace',
         btnCustomMarketplace: 'Custom Marketplace',
         tabGovernance: 'Governance',
+        tabRegistry: 'Registry',
+        tabManagement: 'Management',
+        tabPermissions: 'Permissions',
         btnCloseMarketplace: 'Close marketplace',
         btnSaveChanges: 'Save Changes',
+        textConfirmationMarketplaceClosed: "You don't have a custom marketplace created",
+        btnCreateOne: 'Create one',
     }
 }

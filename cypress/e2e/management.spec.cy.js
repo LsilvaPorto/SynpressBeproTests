@@ -1,17 +1,37 @@
 import GovernancePage from "../pages/marketplace/governance";
+import RegistryPage from "../pages/marketplace/registry";
+import PermissionPage from "../pages/marketplace/permission";
 const governancePage = new GovernancePage();
+const registryPage = new RegistryPage();
+const permissionPage = new PermissionPage();
 const locator = governancePage.commonPageLocator;
-const governanceLocator = governancePage.marketplacePageLocator;
-describe("create Marketplace spec", () => {
+
+describe("Manage a Marketpplace spec", () => {
     before(() => {
         cy.visit('').then(() => {
             cy.get(locator.btnAcceptCookies).click();
         })
         cy.connectWalletFirstTime();
     });
-
-    it("should create a Marketplace successfully", () => {
-        governancePage.openMarketplacePage();
-        governancePage.setDisputeTime(120);
+    after(() => {
+        governancePage.setDisputeTime();
+        registryPage.setCancelFee();
+        
     });
+
+    it("should change disputeTime successfully", () => {
+        governancePage.openMarketplacePage();
+        governancePage.setDisputeTime(123);
+    });
+
+    it("should change disputeFee successfully", () => {
+        registryPage.openMarketplacePage();
+        registryPage.setCancelFee(4);
+    });
+
+    it.only("should change task visibility successfully", () => {
+        permissionPage.openMarketplacePage();
+        permissionPage.SetBannedDomain();
+    });
+
 });
