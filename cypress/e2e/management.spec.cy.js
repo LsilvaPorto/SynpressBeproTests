@@ -24,14 +24,14 @@ describe("Manage a Marketpplace spec", () => {
         governancePage.setDisputeTime(123);
     });
 
-    it("should change disputeFee successfully", () => {
+    it.only("should change disputeFee successfully", () => {
         registryPage.openMarketplacePage();
         registryPage.setCancelFee(4);
     });
 
-    it.only("should change task visibility successfully", () => {
+    it("should change task visibility successfully", () => {
         permissionPage.openMarketplacePage();
-        permissionPage.SetBannedDomain();
+        permissionPage.setBannedDomain("youtube");
     });
 
 });

@@ -63,7 +63,7 @@ export default class Page {
         inputCloseFee: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(2) > div > div > input',
         inputMarketplaceCreationAmount: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div.read-only-wrapper > div > div.align-items-top.mb-5.gy-3.row > div:nth-child(4) > div > div > input',
         toastySuccess: '#__next > div > div.toast-container > div > div.toast-header.border-bottom-0.bg-transparent.px-3 > strong:contains("Success")',
-        inputBlockListDomains: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div:nth-child(3) > div > div.d-flex.flex-column.my-4 > div.d-flex.align-items-center.flex-wrap.mb-4 > div.col-xl-5.col-md-6.col-12 > div > input',
+        inputBannedDomains: '#root-container > div > div.col-12.col-xl-10.p-3.p-xl-5.profile-content.bg-gray-950 > div > div:nth-child(3) > div > div.d-flex.flex-column.my-4 > div.d-flex.align-items-center.flex-wrap.mb-4 > div.col-xl-5.col-md-6.col-12 > div > input',
     
     }
 
@@ -106,5 +106,6 @@ export default class Page {
         btnSaveChanges: 'Save Changes',
         textConfirmationMarketplaceClosed: "You don't have a custom marketplace created",
         btnCreateOne: 'Create one',
+        btnAdd: 'Add',
     }
 }
