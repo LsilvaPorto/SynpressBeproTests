@@ -11,7 +11,7 @@ describe("create Marketplace spec", () => {
         cy.connectWalletFirstTime();
     });
 
-    it.only("should create a Marketplace successfully", () => {
+    it("should create a Marketplace successfully", () => {
         marketplacePage.createMarketplace();
         cy.contains(marketplacePage.elementText.textConfirmationMarketplaceClosed).should('be.visible');
     });
