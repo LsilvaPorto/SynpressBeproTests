@@ -21,8 +21,8 @@ describe("create Task elements spec", () => {
     cy.get(taskLocator.componentTaskStatus, { timeout: 300000 }).should('be.visible');
   });
 
-  it.only("should create a Delivery successfully", () => {
-    cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.row.align-items-center.mb-4').click({ force: true })
+  it("should create a Delivery successfully", () => {
+    // cy.get('#infinite-scroll > div:nth-child(1) > div > div > div.row.align-items-center.mb-4').click({ force: true })
     taskPage.createDeliverable();
     cy.contains(taskPage.elementText.btnMakeAReview, { timeout: 300000 }).should('be.visible');
 
