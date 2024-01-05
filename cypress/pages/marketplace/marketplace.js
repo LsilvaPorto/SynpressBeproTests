@@ -64,20 +64,20 @@ export default class MarketplacePage extends Page {
 
         //all confirmation to create network 
         cy.confirmMetamaskDataSignatureRequest();
-        // this.multipleAcceptTransactions();
-        // this.multipleAcceptTransactions();
-        // this.multipleAcceptTransactions();
-        // this.multipleAcceptTransactions();
-        // this.multipleAcceptTransactions();
-    }
+        cy.confirmMetamaskPermissionToSpend();
 
-    multipleAcceptTransactions(){
-        if (cy.switchToMetamaskNotification()) {
-            cy.confirmMetamaskTransactionAndWaitForMining();
-        } else {
-            cy.wait(5000);
-            this.multipleAcceptTransactions();
-        }
+        cy.contains('Deploying Marketplace (Changing draft time)');
+        cy.confirmMetamaskPermissionToSpend();
+
+        cy.contains('Deploying Marketplace (Changing disputable time)');
+        cy.confirmMetamaskPermissionToSpend();
+
+        cy.contains('Deploying Marketplace (Changing dispute percentage)');
+        cy.confirmMetamaskPermissionToSpend();
+
+        cy.contains('Registering Marketplace');
+        cy.confirmMetamaskPermissionToSpend();
+    
     }
 
     openMarketplacePage() {
@@ -88,10 +88,9 @@ export default class MarketplacePage extends Page {
     closeMarketplace() {
         this.openMarketplacePage();
         cy.contains(this.elementText.tabGovernance).click().wait(1000);
-        cy.contains(this.elementText.btnCloseMarketplace).click();
-        cy.confirmMetamaskTransaction();
+        cy.contains(this.elementText.btnCloseMarketplace).click().wait(2000);
         cy.confirmMetamaskTransactionAndWaitForMining();
-        cy.reload();
+        cy.confirmMetamaskDataSignatureRequest();
     }
 
     waitFordataToLoad(locator) {
