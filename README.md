@@ -1,5 +1,4 @@
-# cypress/shared-state example
-
+# Bepro Tests using Synpres 
 # .env
 PRIVATE_KEY='privateKey'
 
@@ -24,5 +23,6 @@ PRIVATE_KEY_CREATE_NETWORK='privateKey'
 
 ## How to run
 
+- Change your PC language to english (because of metamask validations) 
 - `npm i`
 - `npm test`

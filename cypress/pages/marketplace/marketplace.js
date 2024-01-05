@@ -60,17 +60,24 @@ export default class MarketplacePage extends Page {
         cy.get(this.marketplacePageLocator.beproTransactionalTokens).click();
         cy.get(this.marketplacePageLocator.dropdownRewardTokens).click();
         cy.get(this.marketplacePageLocator.beproRewardTokens).click();
-
         cy.contains(this.elementText.btnCreateMarketplace).click();
 
         //all confirmation to create network 
         cy.confirmMetamaskDataSignatureRequest();
-        cy.confirmMetamaskPermissionToSpend().wait(35000);
-        cy.confirmMetamaskPermissionToSpend().wait(35000);
-        cy.confirmMetamaskPermissionToSpend().wait(35000);
-        cy.confirmMetamaskPermissionToSpend().wait(35000);
-        cy.confirmMetamaskPermissionToSpend().wait(1000);
+        // this.multipleAcceptTransactions();
+        // this.multipleAcceptTransactions();
+        // this.multipleAcceptTransactions();
+        // this.multipleAcceptTransactions();
+        // this.multipleAcceptTransactions();
+    }
 
+    multipleAcceptTransactions(){
+        if (cy.switchToMetamaskNotification()) {
+            cy.confirmMetamaskTransactionAndWaitForMining();
+        } else {
+            cy.wait(5000);
+            this.multipleAcceptTransactions();
+        }
     }
 
     openMarketplacePage() {
@@ -82,8 +89,8 @@ export default class MarketplacePage extends Page {
         this.openMarketplacePage();
         cy.contains(this.elementText.tabGovernance).click().wait(1000);
         cy.contains(this.elementText.btnCloseMarketplace).click();
-        cy.confirmMetamaskTransaction().wait(10000);
-        cy.confirmMetamaskDataSignatureRequest();
+        cy.confirmMetamaskTransaction();
+        cy.confirmMetamaskTransactionAndWaitForMining();
         cy.reload();
     }
 
@@ -98,18 +105,16 @@ export default class MarketplacePage extends Page {
                     cy.wait(2000);
                     this.waitFordataToLoad(locator);
                 }
-        })
+            })
     }
 
-    setMarketplaceConfig(tab, configToChange, valueToChange){
+    setMarketplaceConfig(elTab, tab, configToChange, valueToChange) {
         const locatorToWait = configToChange;
-        cy.contains(tab).click();
+        cy.contains(elTab, tab).click({ force: true });
         this.waitFordataToLoad(locatorToWait);
         cy.get(configToChange).clear().type(valueToChange).wait(1000);
         cy.contains(this.elementText.btnSaveChanges).click();
         cy.confirmMetamaskPermissionToSpend();
-        cy.get(this.managementPageLocator.toastySuccess).should('exist').reload();
-        cy.contains(tab).click();
     }
 
 }

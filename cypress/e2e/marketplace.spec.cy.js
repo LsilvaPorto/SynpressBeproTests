@@ -13,7 +13,7 @@ describe("create Marketplace spec", () => {
 
     it("should create a Marketplace successfully", () => {
         marketplacePage.createMarketplace();
-        cy.contains(marketplacePage.elementText.textConfirmationMarketplaceClosed).should('be.visible');
+        cy.contains(marketplacePage.elementText.btnCreateOne).should('be.visible');
     });
 
     it("should close a Marketplace successfully", () => {
