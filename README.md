@@ -15,6 +15,8 @@ IS_TESTNET=true
 
 CYPRESS_REMOTE_DEBUGGING_PORT=9222
 
+PRIVATE_KEY_CREATE_NETWORK='privateKey'
+
 # Lib config
 ## Only in Appollodorus (I don't know why, but in afrodite we don't need this step)
 - go to `node_modules/@synthetixio/synpress/commands/metamask.js`

@@ -2,6 +2,7 @@ const { defineConfig } = require("cypress");
 const synpressPlugins = require("@synthetixio/synpress/plugins");
 
 module.exports = defineConfig({
+  env: {...process.env },
   userAgent: "synpress",
   chromeWebSecurity: true,
   defaultCommandTimeout: 30000,
