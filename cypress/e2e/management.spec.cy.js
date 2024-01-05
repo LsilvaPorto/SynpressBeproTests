@@ -21,12 +21,14 @@ describe("Manage a Marketpplace spec", () => {
 
     it("should change disputeTime successfully", () => {
         governancePage.openMarketplacePage();
-        governancePage.setDisputeTime(123);
+        governancePage.setDisputeTime(122);
+        cy.get(governancePage.managementPageLocator.toastySuccess).should('exist');
     });
 
-    it.only("should change disputeFee successfully", () => {
+    it("should change cancelFee successfully", () => {
         registryPage.openMarketplacePage();
-        registryPage.setCancelFee(4);
+        registryPage.setCancelFee(3);
+        cy.wait(50000);
     });
 
     it("should change task visibility successfully", () => {

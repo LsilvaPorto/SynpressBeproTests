@@ -12,19 +12,19 @@ export default class RegistryPage extends MarketplacePage {
         
     }
     setCancelFee(cancelFee = 2) {
-        this.setMarketplaceConfig(this.element,this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, cancelFee);
+        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, cancelFee);
     }
 
     setCloseFee(closeFee = 10) {
-        this.setMarketplaceConfig(this.element, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, closeFee);
+        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, closeFee);
     }
 
     setMarketplaceCreationFee(marketplaceCreationFee = 2) {
-        this.setMarketplaceConfig(this.element, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, marketplaceCreationFee);
+        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, marketplaceCreationFee);
     }
 
     setMarketplaceCreationAmount(marketplaceCreationAmount = 10000) {
-        this.setMarketplaceConfig(this.element, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, marketplaceCreationAmount);
+        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabRegistry, this.managementPageLocator.inputCancelFee, marketplaceCreationAmount);
     }
 
 }

@@ -135,7 +135,7 @@ export default class TaskPage extends Page {
         cy.get(this.taskPageLocator.imgPreviewLinkDeliverable).should('be.visible');
         cy.get(this.taskPageLocator.inputDeliverableTitle).type(this.createTaskTitle(), { force: true });
         cy.get(this.taskPageLocator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
-        cy.contains(this.taskPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().wait(1000).click();
+        cy.contains(this.commonPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().wait(1000).click();
         // cy.contains('h5', 'Create Deliverable + button').click();
         cy.confirmMetamaskTransaction();
         cy.contains(this.elementText.btnMarkAsReady).wait(1000).click();
