@@ -21,8 +21,8 @@ export default class TaskPage extends Page {
 
     selectMarketplace() {
         // Clica no item com texto "bepro" dentro do dropdown
-        cy.contains(this.commonPageLocator.beproMarketSelect, this.elementText.btnBepro).click().wait(500);
-        cy.get(this.commonPageLocator.btnNext).click().wait(500);
+        cy.contains(this.commonPageLocator.beproMarketSelect, this.elementText.btnBepro).click();
+        cy.get(this.commonPageLocator.btnNext).click();
     }
 
     fillTaskTitle() {
@@ -79,17 +79,23 @@ export default class TaskPage extends Page {
         this.insertTag();
 
         cy.contains(this.elementText.btnCode).click({ force: true });
-        cy.get(this.commonPageLocator.btnNext).click().wait(1000);
+        cy.get(this.commonPageLocator.btnNext).click();
         this.fillTaskValue();
+        cy.wait(3000);
 
-        cy.get(this.commonPageLocator.btnNext).wait(2000).click().wait(1000);
-        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().wait(1000).click({ force: true });
-        cy.confirmMetamaskPermissionToSpend(this.value);
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
+        cy.confirmMetamaskPermissionToSpend().wait(12000);
 
-        cy.contains(this.elementText.createTask).wait(1000).click({ force: true });
-        // cy.confirmMetamaskTransaction();
-        cy.confirmMetamaskPermissionToSpend();
-
+        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
+            cy.log($buttonText);
+            if (!$buttonText.includes(this.elementText.createTask)) {
+                cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
+                cy.confirmMetamaskPermissionToSpend();
+            }
+            cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true });
+            cy.confirmMetamaskTransactionAndWaitForMining();
+        });
     }
 
     waitTaskChangeStatusToOpen() {
@@ -109,7 +115,6 @@ export default class TaskPage extends Page {
                 });
         }, { timeout: 120000, interval: 10000 }).then(() => {
             cy.log('Task status changed to open');
-            cy.wait(1000);
         })
     }
 
@@ -120,14 +125,14 @@ export default class TaskPage extends Page {
             cy.log($buttonText);
             if ($buttonText.includes(this.elementText.btnStartWorking)) {
                 // O botão "Start Working" está presente, clique nele
-                cy.contains(this.elementText.btnStartWorking).wait(500).click({ force: true }).wait(1000);
+                cy.contains(this.elementText.btnStartWorking).should('be.enabled').click({ force: true });
 
                 // Agora, clique no botão "Create Deliverable"
-                cy.contains(this.elementText.btnCreateDeliverable).wait(1000).click({ force: true }).wait(500);
+                cy.contains(this.elementText.btnCreateDeliverable).should('be.enabled').click({ force: true });
             } else {
                 // O botão "Start Working" não está presente, clique diretamente no botão "Create Deliverable"
                 cy.log('Start Working button not present, clicking Create Deliverable directly');
-                cy.contains(this.elementText.btnCreateDeliverable).wait(500).click({ force: true });
+                cy.contains(this.elementText.btnCreateDeliverable).should('be.enabled').click({ force: true });
             }
         });
 
@@ -135,12 +140,11 @@ export default class TaskPage extends Page {
         cy.get(this.taskPageLocator.imgPreviewLinkDeliverable).should('be.visible');
         cy.get(this.taskPageLocator.inputDeliverableTitle).type(this.createTaskTitle(), { force: true });
         cy.get(this.taskPageLocator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
-        cy.contains(this.commonPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().wait(1000).click();
-        // cy.contains('h5', 'Create Deliverable + button').click();
-        cy.confirmMetamaskTransaction();
-        cy.contains(this.elementText.btnMarkAsReady).wait(1000).click();
-        cy.confirmMetamaskTransaction()
-        cy.get(this.taskPageLocator.btnArrowBackFromDeliverable).wait(1000).click({ force: true });
+        cy.contains(this.commonPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().should('be.enabled').click();
+        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.contains(this.elementText.btnMarkAsReady).should('be.enabled').click();
+        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.get(this.taskPageLocator.btnArrowBackFromDeliverable).click({ force: true });
     }
 
     createProposal() {
@@ -148,12 +152,12 @@ export default class TaskPage extends Page {
         cy.contains(this.taskPageLocator.dropdownProposal, this.taskPageLocator.placeholderProposal).click({ force: true });
         cy.get(this.taskPageLocator.dropdownOptionProposal).first().click({ force: true });
         cy.get(this.taskPageLocator.btnFinishProposalCreation).click({ force: true });
-        cy.confirmMetamaskTransaction();
+        cy.confirmMetamaskTransactionAndWaitForMining();
 
     }
 
     acceptProposal() {
-        cy.contains(this.elementText.btnViewProposal).click({ force: true }).wait(1000);
+        cy.contains(this.elementText.btnViewProposal).click({ force: true });
 
         cy.waitUntil(() => {
             cy.wait(3000);
@@ -171,10 +175,9 @@ export default class TaskPage extends Page {
                 });
         }, { timeout: 120000, interval: 10000 }).then(() => {
             cy.log('Task status changed to open');
-            cy.contains(this.elementText.btnAcceptProposal).wait(3000).click({ force: true });
-            cy.wait(1000);
+            cy.contains(this.elementText.btnAcceptProposal).should('be.enabled').click({ force: true });
         })
-        cy.contains(this.elementText.btnConfirmDistribution).wait(2000).click({ force: true });
-        cy.confirmMetamaskTransaction();
+        cy.contains(this.elementText.btnConfirmDistribution).should('be.enabled').click({ force: true });
+        cy.confirmMetamaskTransactionAndWaitForMining();
     }
 }

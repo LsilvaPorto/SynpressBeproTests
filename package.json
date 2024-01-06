@@ -11,7 +11,7 @@
     "env-cmd": "^10.1.0"
   },
   "scripts": {
-    "test": "env-cmd -f .env cypress run --browser chrome --headed --spec 'cypress/e2e/marketplace.spec.cy.js' --no-exit"
+    "test": "env-cmd -f .env cypress run --browser chrome --headed --spec 'cypress/e2e/regression-tests.spec.cy.js' --no-exit"
   },
   "dependencies": {
     "cypress-wait-until": "^3.0.1"

@@ -30,21 +30,21 @@ const { faker } = require('@faker-js/faker');
 const page = new Page();
 
 Cypress.Commands.add('connectWalletFirstTime', () => {
-    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
+    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.acceptMetamaskAccess();
-    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
+    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });
 
 Cypress.Commands.add('connectWallet', () => {
-    cy.contains(page.elementText.btnConnectWallet).wait(500).click();
+    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });
 
 Cypress.Commands.add('openMenuToCreate', (element) => {
     cy.contains(page.elementText.btnCreate).click();
     cy.contains(element).click();
-    cy.contains(page.elementText.btnContinue).wait(1000).click().wait(1000);
+    cy.contains(page.elementText.btnContinue).click();
 });
 
 
