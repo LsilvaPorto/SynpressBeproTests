@@ -31,7 +31,9 @@ const page = new Page();
 
 Cypress.Commands.add('connectWalletFirstTime', () => {
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
-    cy.acceptMetamaskAccess();
+    cy.acceptMetamaskAccess({
+        allAccounts: true
+      });
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });

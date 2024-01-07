@@ -28,6 +28,8 @@ export default class MarketplacePage extends Page {
     }
     createMarketplace() {
         cy.openMenuToCreate(this.elementText.textCreateMarketplace);
+        cy.contains('span', 'Max');
+        //bug in application mades me need to reload the page to the tokens appears
         cy.reload();
 
         //wait page to be ready for interaction
