@@ -109,5 +109,7 @@ export default class Page {
         textConfirmationMarketplaceClosed: "You don't have a custom marketplace created",
         btnCreateOne: 'Create one',
         btnAdd: 'Add',
+        btnEditTask: 'Edit task',
+        
     }
 }
