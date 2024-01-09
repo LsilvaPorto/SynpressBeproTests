@@ -1,4 +1,4 @@
-import MarketplacePage from "./marketplace";
+import MarketplacePage from "../marketplace/marketplace-page";
 
 export default class GovernancePage extends MarketplacePage {
 

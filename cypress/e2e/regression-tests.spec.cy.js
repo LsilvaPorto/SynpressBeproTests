@@ -1,7 +1,7 @@
-import MarketplacePage from "../pages/marketplace/marketplace";
-import TaskPage from "../pages/task/task";
+import MarketplacePage from "../pages/marketplace/marketplace-page";
+import TaskPage from "../pages/task/task-page";
 import Page from "../pages/page";
-import ProfilePage from "../pages/marketplace/profile";
+import ProfilePage from "../pages/profile/profile-page";
 const page = new Page();
 const marketplacePage = new MarketplacePage();
 const taskPage = new TaskPage();
