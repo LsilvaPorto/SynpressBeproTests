@@ -34,7 +34,7 @@ Cypress.Commands.add('connectWalletFirstTime', () => {
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.acceptMetamaskAccess({
         allAccounts: true
-      });
+    });
     cy.switchMetamaskAccount(2);
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
@@ -55,4 +55,18 @@ Cypress.Commands.add('openMenuToCreate', (element) => {
 Cypress.Commands.add('createDescription', () => {
     const description = faker.lorem.paragraphs(2, '<br/>\n');
     return description.toString();
+});
+
+
+Cypress.Commands.add('openProfilePage', (element) => {
+    cy.get(page.commonPageLocator.profileIcon).click().wait(500);
+    cy.contains(element).click().wait(1000);
+});
+
+Cypress.Commands.add('SwitchAccountAndConnect', (account) => {
+    cy.get(page.commonPageLocator.profileIcon).click();
+    cy.contains('span', 'Disconnect').click();
+    cy.switchMetamaskAccount(account);
+    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
+    cy.connectWallet();
 });

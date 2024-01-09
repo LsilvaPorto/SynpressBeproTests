@@ -100,6 +100,7 @@ export default class Page {
         placeholderMarketplaceDescription: 'Type a description...',
         btnCreateMarketplace: 'Create Marketplace',
         btnCustomMarketplace: 'Custom Marketplace',
+        btnVotingPower: 'Voting Power',
         tabGovernance: 'Governance',
         tabRegistry: 'Registry',
         tabManagement: 'Management',

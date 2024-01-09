@@ -157,6 +157,20 @@ export default class TaskPage extends Page {
 
     }
 
+    changeTaskDescription(){
+        cy.contains('button', this.elementText.btnEditTask).click({ force: true });
+        cy.get('#root-container > div.container-xl > div > div > div.mb-1 > div > div.col-md-8 > div > div.bg-gray-900.p-3.rounded.border.border-gray-800 > div > textarea')
+            .clear()
+            .type('Description automaticaly changed for testing purposes');
+        cy.contains('button', 'Save Changes').click({ force: true });
+        cy.contains('Success').should('be.visible');
+    }
+    cancelTask(){
+        cy.contains('Options').click({ force: true });
+        cy.contains('button', 'Cancel task').click();
+        cy.confirmMetamaskTransactionAndWaitForMining();
+    }
+
     waitTaskChangeStatusToOpen() {
         cy.waitUntil(() => {
             // Use cy.get dentro do loop para obter o elemento atualizado

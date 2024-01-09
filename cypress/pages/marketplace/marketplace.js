@@ -82,13 +82,13 @@ export default class MarketplacePage extends Page {
     
     }
 
-    openMarketplacePage() {
+    openProfilePage(element) {
         cy.get(this.commonPageLocator.profileIcon).click().wait(500);
-        cy.contains(this.elementText.btnCustomMarketplace).click().wait(1000);
+        cy.contains(element).click().wait(1000);
     }
 
     closeMarketplace() {
-        this.openMarketplacePage();
+        cy.openProfilePage(this.elementText.btnCustomMarketplace);
         cy.contains(this.elementText.tabGovernance).click().wait(1000);
         cy.contains(this.elementText.btnCloseMarketplace).click().wait(2000);
         cy.confirmMetamaskTransactionAndWaitForMining();
