@@ -30,10 +30,12 @@ const { faker } = require('@faker-js/faker');
 const page = new Page();
 
 Cypress.Commands.add('connectWalletFirstTime', () => {
+    cy.importMetamaskAccount(Cypress.env('PRIVATE_KEY_CREATE_NETWORK'));
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.acceptMetamaskAccess({
         allAccounts: true
       });
+    cy.switchMetamaskAccount(2);
     cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });

@@ -11,7 +11,6 @@ describe("Do regression tests in the app spec", () => {
         cy.visit('').then(() => {
             cy.get(page.commonPageLocator.btnAcceptCookies).click();
         })
-        cy.importMetamaskAccount(Cypress.env('PRIVATE_KEY_CREATE_NETWORK'));
         cy.connectWalletFirstTime();
         cy.get(page.commonPageLocator.profileIcon).should('be.visible');
     });
@@ -46,13 +45,15 @@ describe("Do regression tests in the app spec", () => {
     });
 
     it("should create a Funding Request task with Reward successfully", () => {
-
+        taskPage.createFundingRequest();
+        cy.get(taskLocator.componentTaskStatus).should('be.visible').invoke('text').should('be.eq', 'funding');
     });
 
-    it("should create a Funding Request task without Reward task successfully", () => {
-
+    it.only("should create a Funding Request task without Reward task successfully", () => {
+        taskPage.createFundingRequestWithReward();
+        cy.get(taskLocator.componentTaskStatus).should('be.visible').invoke('text').should('be.eq', 'funding');
     });
-    
+
     it("should create new Marketplace successfully", () => {
         cy.get(page.commonPageLocator.profileIcon).click();
         cy.contains('span', 'Disconnect').click();

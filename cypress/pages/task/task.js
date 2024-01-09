@@ -98,6 +98,65 @@ export default class TaskPage extends Page {
         });
     }
 
+    createFundingRequest() {
+        cy.openMenuToCreate(this.elementText.textCreateTask);
+        cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
+
+        this.selectMarketplace();
+        this.fillTaskTitle();
+        this.fillTaskDescription();
+        this.insertTag();
+
+        cy.contains(this.elementText.btnCode).click({ force: true });
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.contains(this.commonPageLocator.btn, 'Seek Funding').click({ force: true })
+        const value = this.createTaskValue();
+        cy.get(this.commonPageLocator.inputTotalAmmount).type(value);
+        this.value = value;
+        cy.wait(3000);
+
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.contains(this.elementText.createTask).scrollIntoView().should('be.enabled').click({ force: true });
+        cy.confirmMetamaskTransactionAndWaitForMining();
+
+    }
+
+    createFundingRequestWithReward() {
+        cy.openMenuToCreate(this.elementText.textCreateTask);
+        cy.get(this.commonPageLocator.inputMarketPlaceSelect).click();
+
+        this.selectMarketplace();
+        this.fillTaskTitle();
+        this.fillTaskDescription();
+        this.insertTag();
+
+        cy.contains(this.elementText.btnCode).click({ force: true });
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.contains(this.commonPageLocator.btn, 'Seek Funding').click({ force: true })
+        const value = this.createTaskValue();
+        cy.get(this.commonPageLocator.inputTotalAmmount).type(value);
+        this.value = value;
+        cy.wait(3000);
+        cy.get('#custom-switch').click({ force: true });
+        //Set Funded Reward input
+        cy.get('#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div:nth-child(7) > div > div.col-md-4.col-12 > div > div.input-group.border-radius-4 > input').wait(3000).type(this.value);
+        
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().should('be.enabled').click({ force: true });
+        cy.confirmMetamaskPermissionToSpend().wait(16000);
+
+        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
+            cy.log($buttonText);
+            if (!$buttonText.includes(this.elementText.createTask)) {
+                cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
+                cy.confirmMetamaskPermissionToSpend();
+            }
+            cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true });
+            cy.confirmMetamaskTransactionAndWaitForMining();
+        });
+
+    }
+
     waitTaskChangeStatusToOpen() {
         cy.waitUntil(() => {
             // Use cy.get dentro do loop para obter o elemento atualizado
