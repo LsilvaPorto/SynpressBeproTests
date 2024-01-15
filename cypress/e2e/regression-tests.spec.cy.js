@@ -21,7 +21,7 @@ describe("Do regression tests in the app spec", () => {
         cy.visit('');
     });
 
-    it.skip("should create and finish a task successfully", () => {
+    it("should create and finish a task successfully", () => {
         taskPage.createTask();
         cy.get(taskLocator.componentTaskStatus).should('be.visible');
         // cy.get(':nth-child(1) > .p-3').click({ force: true });
@@ -54,14 +54,14 @@ describe("Do regression tests in the app spec", () => {
         cy.get(taskLocator.componentTaskStatus).should('be.visible').invoke('text').should('be.eq', 'funding');
     });
 
-    it.skip("should create new Marketplace successfully", () => {
+    it("should create new Marketplace successfully", () => {
         cy.switchAccountAndConnect(3);
         marketplacePage.createMarketplace();
         cy.contains(marketplacePage.elementText.btnCreateOne).should('be.visible');
 
     });
 
-    it.skip("should close new Marketplace successfully", () => {
+    it("should close new Marketplace successfully", () => {
         marketplacePage.closeMarketplace();
         cy.contains(marketplacePage.elementText.textConfirmationMarketplaceClosed).should('be.visible');
     });
