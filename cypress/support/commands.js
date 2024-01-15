@@ -25,18 +25,18 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
-import Page from "../pages/page";
+import Locators from "../pages/locators";
 const { faker } = require('@faker-js/faker');
-const page = new Page();
+const locators = new Locators();
 
 Cypress.Commands.add('connectWalletFirstTime', () => {
     cy.importMetamaskAccount(Cypress.env('PRIVATE_KEY_CREATE_NETWORK'));
-    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
+    cy.contains(locators.elementText.btnConnectWallet).should('be.enabled').click();
     cy.acceptMetamaskAccess({
         allAccounts: true
     });
     cy.switchMetamaskAccount(2);
-    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
+    cy.contains(locators.elementText.btnConnectWallet).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });
 
@@ -46,9 +46,9 @@ Cypress.Commands.add('connectWallet', () => {
 });
 
 Cypress.Commands.add('openMenuToCreate', (element) => {
-    cy.contains(page.elementText.btnCreate).click();
+    cy.contains(locators.elementText.btnCreate).click();
     cy.contains(element).click();
-    cy.contains(page.elementText.btnContinue).click();
+    cy.contains(locators.elementText.btnContinue).click();
 });
 
 
@@ -59,14 +59,14 @@ Cypress.Commands.add('createDescription', () => {
 
 
 Cypress.Commands.add('openProfilePage', (element) => {
-    cy.get(page.commonPageLocator.profileIcon).click().wait(500);
+    cy.get(locators.commonPageLocator.profileIcon).click().wait(500);
     cy.contains(element).click().wait(1000);
 });
 
 Cypress.Commands.add('SwitchAccountAndConnect', (account) => {
-    cy.get(page.commonPageLocator.profileIcon).click();
+    cy.get(locators.commonPageLocator.profileIcon).click();
     cy.contains('span', 'Disconnect').click();
     cy.switchMetamaskAccount(account);
-    cy.contains(page.elementText.btnConnectWallet).should('be.enabled').click();
+    cy.contains(locators.elementText.btnConnectWallet).should('be.enabled').click();
     cy.connectWallet();
 });

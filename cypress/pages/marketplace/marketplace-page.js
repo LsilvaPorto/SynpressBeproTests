@@ -1,7 +1,7 @@
-import Page from "../page";
+import Locators from "../locators";
 const { faker } = require('@faker-js/faker');
 
-export default class MarketplacePage extends Page {
+export default class MarketplacePage extends Locators {
     createMarketplaceName() {
         const mp = faker.company.name();
         return mp.toString();

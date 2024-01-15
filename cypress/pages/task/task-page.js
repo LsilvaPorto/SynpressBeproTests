@@ -1,6 +1,6 @@
-import Page from "../page";
+import Locators from "../locators";
 const { faker } = require('@faker-js/faker');
-export default class TaskPage extends Page {
+export default class TaskPage extends Locators {
     link = 'https://afrodite.bepro.network';
     value = null;
 
@@ -84,18 +84,18 @@ export default class TaskPage extends Page {
         cy.wait(3000);
 
         cy.get(this.commonPageLocator.btnNext).click();
-        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
-        cy.confirmMetamaskPermissionToSpend().wait(12000);
+        cy.get(this.commonPageLocator.btnApprove).should('be.enabled').should('not.have.class', 'spinner-border').scrollIntoView().click({ force: true }).wait(1000);
+        cy.confirmMetamaskPermissionToSpend();
 
-        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
-            cy.log($buttonText);
-            if (!$buttonText.includes(this.elementText.createTask)) {
-                cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
-                cy.confirmMetamaskPermissionToSpend();
-            }
-            cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true });
-            cy.confirmMetamaskTransactionAndWaitForMining();
-        });
+        // cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
+        //     cy.log($buttonText);
+        //     if (!$buttonText.includes(this.elementText.createTask)) {
+        //         cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
+        //         cy.confirmMetamaskPermissionToSpend();
+        //     }
+        cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true }).wait(1000);
+        cy.confirmMetamaskTransactionAndWaitForMining();
+        // });
     }
 
     createFundingRequest() {
@@ -116,7 +116,7 @@ export default class TaskPage extends Page {
         cy.wait(3000);
 
         cy.get(this.commonPageLocator.btnNext).click();
-        cy.contains(this.elementText.createTask).scrollIntoView().should('be.enabled').click({ force: true });
+        cy.contains(this.elementText.createTask).scrollIntoView().should('be.enabled').click({ force: true }).wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();
 
     }
@@ -140,24 +140,29 @@ export default class TaskPage extends Page {
         cy.get('#custom-switch').click({ force: true });
         //Set Funded Reward input
         cy.get('#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div:nth-child(7) > div > div.col-md-4.col-12 > div > div.input-group.border-radius-4 > input').wait(3000).type(this.value);
-        
-        cy.get(this.commonPageLocator.btnNext).click();
-        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().should('be.enabled').click({ force: true });
-        cy.confirmMetamaskPermissionToSpend().wait(16000);
 
-        cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
-            cy.log($buttonText);
-            if (!$buttonText.includes(this.elementText.createTask)) {
-                cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true });
-                cy.confirmMetamaskPermissionToSpend();
-            }
-            cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true });
-            cy.confirmMetamaskTransactionAndWaitForMining();
-        });
+        cy.get(this.commonPageLocator.btnNext).click();
+        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().should('be.enabled').click({ force: true }).wait(1000);
+        cy.confirmMetamaskPermissionToSpend();
+
+        cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true }).wait(2000);
+        cy.confirmMetamaskPermissionToSpend();
+        cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true }).wait(2000);
+        cy.confirmMetamaskTransactionAndWaitForMining();
+
+        // cy.get(this.commonPageLocator.btn).invoke('text').then(($buttonText) => {
+        //     cy.log($buttonText);
+        //     if (!$buttonText.includes(this.elementText.createTask)) {
+        //         cy.get(this.commonPageLocator.btnApprove).scrollIntoView().click({ force: true }).wait(1000);
+        //         cy.confirmMetamaskPermissionToSpend();
+        //     }
+        //     cy.contains(this.elementText.createTask).should('be.enabled').click({ force: true }).wait(1000);
+        //     cy.confirmMetamaskTransactionAndWaitForMining();
+        // });
 
     }
 
-    changeTaskDescription(){
+    changeTaskDescription() {
         cy.contains('button', this.elementText.btnEditTask).click({ force: true });
         cy.get('#root-container > div.container-xl > div > div > div.mb-1 > div > div.col-md-8 > div > div.bg-gray-900.p-3.rounded.border.border-gray-800 > div > textarea')
             .clear()
@@ -165,9 +170,9 @@ export default class TaskPage extends Page {
         cy.contains('button', 'Save Changes').click({ force: true });
         cy.contains('Success').should('be.visible');
     }
-    cancelTask(){
+    cancelTask() {
         cy.contains('Options').click({ force: true });
-        cy.contains('button', 'Cancel task').click();
+        cy.contains('button', 'Cancel task').click().wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();
     }
 
@@ -177,7 +182,7 @@ export default class TaskPage extends Page {
             return cy.get(this.taskPageLocator.componentTaskStatus)
                 .invoke('text')
                 .then((text) => {
-                    if (text === 'open') {
+                    if (text === 'open' || text === 'ready') {
                         return true;
                     } else {
                         cy.reload().then(() => {
@@ -213,9 +218,9 @@ export default class TaskPage extends Page {
         cy.get(this.taskPageLocator.imgPreviewLinkDeliverable).should('be.visible');
         cy.get(this.taskPageLocator.inputDeliverableTitle).type(this.createTaskTitle(), { force: true });
         cy.get(this.taskPageLocator.inputDeliverableDescription).type(this.createTaskDescription(), { force: true });
-        cy.contains(this.commonPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().should('be.enabled').click();
+        cy.contains(this.commonPageLocator.btn, this.elementText.btnCreateDeliverable).scrollIntoView().should('be.enabled').click().wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();
-        cy.contains(this.elementText.btnMarkAsReady).should('be.enabled').click();
+        cy.get(this.elementText.btnMarkAsReady).contains('Mark as ready').wait(1000).click();
         cy.confirmMetamaskTransactionAndWaitForMining();
         cy.get(this.taskPageLocator.btnArrowBackFromDeliverable).click({ force: true });
     }
@@ -224,7 +229,7 @@ export default class TaskPage extends Page {
         cy.contains(this.elementText.btnCreateProposal).click({ force: true });
         cy.contains(this.taskPageLocator.dropdownProposal, this.taskPageLocator.placeholderProposal).click({ force: true });
         cy.get(this.taskPageLocator.dropdownOptionProposal).first().click({ force: true });
-        cy.get(this.taskPageLocator.btnFinishProposalCreation).click({ force: true });
+        cy.get(this.taskPageLocator.btnFinishProposalCreation).click({ force: true }).wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();
 
     }
@@ -250,7 +255,7 @@ export default class TaskPage extends Page {
             cy.log('Task status changed to open');
             cy.contains(this.elementText.btnAcceptProposal).should('be.enabled').click({ force: true });
         })
-        cy.contains(this.elementText.btnConfirmDistribution).should('be.enabled').click({ force: true });
+        cy.contains(this.elementText.btnConfirmDistribution).should('be.enabled').click({ force: true }).wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();
     }
 }

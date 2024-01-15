@@ -1,7 +1,7 @@
-import Page from "../page";
+import Locators from "../locators";
 const { faker } = require('@faker-js/faker');
 
-export default class ProfilePage extends Page {
+export default class ProfilePage extends Locators {
 
     selectMarketplaceAndNetwork(MarketplaceName, networkName) {
         cy.contains('input', 'Select Marketplace').click();
