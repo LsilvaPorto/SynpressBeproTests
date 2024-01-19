@@ -33,7 +33,7 @@ export default class Locators {
     }
 
     marketplacePageLocator = {
-        elementAfterNANInMarketplace: '0%',
+        tBeproAvailable: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div:nth-child(1) > div > div > div.row.bg-dark-gray.border-radius-8.amount-input > div > div.d-flex.caption-small.justify-content-between.align-items-center.p-3.mt-1.mb-1 > div > span',
         marketplaceValueToApprove: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-between.caption-large.mb-3.amount-input > div:nth-child(2) > span',
         btnLockTBepro: '#root-container > div > div > div > div > div > div > div > div:nth-child(1) > div.collapse.show > div > div.row.mx-0.mb-4 > div.col.bg-dark-gray.border-radius-8.p-3.mr-3 > div.d-flex.justify-content-center.mt-4.pt-3 > button.btn.btn-primary.text-white.d-flex.align-items-center.justify-content-center.text-uppercase.shadow-none > span',
         logoIcon: '#logoIcon',
@@ -46,10 +46,9 @@ export default class Locators {
         inputDraftTime: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.row.pt-2 > div:nth-child(2) > div.row.mt-2.gy-3 > div:nth-child(3) > div > div > input',
         inputCuratorAmount: '#root-container > div > div > div > div > div > div > div > div:nth-child(3) > div.collapse.show > div.row.pt-2 > div:nth-child(2) > div.row.mt-2.gy-3 > div:nth-child(4) > div > div > input',
         dropdownTransactionalTokens: '#root-container > div > div > div > div > div > div > div > div:nth-child(4) > div.collapse.show > div.row.pt-2 > div:nth-child(3) > div > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
-        beproTransactionalTokens: '#react-select-2-option-1',
+        beproTransactionalTokens: '#react-select-3-option-1',
         dropdownRewardTokens: '#root-container > div > div > div > div > div > div > div > div:nth-child(4) > div.collapse.show > div.row.pt-2 > div:nth-child(4) > div > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
-        beproRewardTokens: '#react-select-3-option-0',
-
+        beproRewardTokens: '#react-select-4-option-0',
     }
 
     managementPageLocator = {
@@ -111,6 +110,6 @@ export default class Locators {
         btnCreateOne: 'Create one',
         btnAdd: 'Add',
         btnEditTask: 'Edit task',
-        
+        btnConnectMetamask: 'Metamask',
     }
 }

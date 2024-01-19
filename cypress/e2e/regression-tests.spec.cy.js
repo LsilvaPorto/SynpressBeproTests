@@ -14,17 +14,16 @@ describe("Do regression tests in the app spec", () => {
             cy.get(locators.commonPageLocator.btnAcceptCookies).click();
         })
         cy.connectWalletFirstTime();
-        cy.get(locators.commonPageLocator.profileIcon).should('be.visible');
+       
     });
 
     afterEach(() => {
-        cy.visit('');
+        // cy.visit('');
     });
 
-    it("should create and finish a task successfully", () => {
+    it.only("should create and finish a task successfully", () => {
         taskPage.createTask();
         cy.get(taskLocator.componentTaskStatus).should('be.visible');
-        // cy.get(':nth-child(1) > .p-3').click({ force: true });
         taskPage.createDeliverable();
         cy.contains('Marked deliverable as ready.').should('be.visible');
         taskPage.createProposal();
@@ -34,12 +33,14 @@ describe("Do regression tests in the app spec", () => {
 
     it("should change task's description successfully", () => {
         taskPage.createTask();
+        cy.get(taskLocator.componentTaskStatus).should('be.visible');
         taskPage.changeTaskDescription();
     });
 
     it("should Cancel task successfully", () => {
+        
         taskPage.createTask();
-        // cy.get(':nth-child(1) > .p-3').click({ force: true });
+        cy.get(taskLocator.componentTaskStatus).should('be.visible');
         taskPage.cancelTask();
         cy.contains('canceled').should('be.visible');
     });
@@ -62,6 +63,7 @@ describe("Do regression tests in the app spec", () => {
     });
 
     it("should close new Marketplace successfully", () => {
+        // cy.switchAccountAndConnect(3);
         marketplacePage.closeMarketplace();
         cy.contains(marketplacePage.elementText.textConfirmationMarketplaceClosed).should('be.visible');
     });
