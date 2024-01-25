@@ -31,6 +31,7 @@ export default class MarketplacePage extends Locators {
         cy.contains('span', 'Max');
 
         //wait page to be ready for interaction
+        cy.reload();
         cy.get(this.marketplacePageLocator.tBeproAvailable).should('not.have.text', '0');
         cy.contains(this.elementText.btnMax).click();
         cy.contains(this.elementText.btnApprove).should('be.enabled').click();
@@ -56,28 +57,32 @@ export default class MarketplacePage extends Locators {
         cy.get(this.marketplacePageLocator.inputCuratorAmount).clear().type(1000);
         cy.get(this.marketplacePageLocator.btnNextStep3).click();
         //dropdown 
-        cy.get(this.marketplacePageLocator.dropdownTransactionalTokens).click();
-        cy.get(this.marketplacePageLocator.beproTransactionalTokens).click();
-        cy.get(this.marketplacePageLocator.dropdownRewardTokens).click();
-        cy.get(this.marketplacePageLocator.beproRewardTokens).click();
+        // cy.get(this.marketplacePageLocator.dropdownTransactionalTokens).click();
+        // cy.get(this.marketplacePageLocator.beproTransactionalTokens).click();
+        // cy.get(this.marketplacePageLocator.dropdownRewardTokens).click();
+        // cy.get(this.marketplacePageLocator.beproRewardTokens).click();
         cy.contains(this.elementText.btnCreateMarketplace).click();
 
         //all confirmation to create network 
         cy.confirmMetamaskDataSignatureRequest().wait(1000);
         cy.confirmMetamaskPermissionToSpend();
 
-        cy.contains('Deploying Marketplace (Changing draft time)').wait(3000);
+        cy.contains('Deploying Marketplace (Changing draft time)');
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
 
-        cy.contains('Deploying Marketplace (Changing disputable time)').wait(3000);
+        cy.contains('Deploying Marketplace (Changing disputable time)');
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
 
-        cy.contains('Deploying Marketplace (Changing dispute percentage)').wait(3000);
+        cy.contains('Deploying Marketplace (Changing dispute percentage)');
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
 
-        cy.contains('Registering Marketplace').wait(3000);
+        cy.contains('Registering Marketplace');
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
-    
+
     }
 
     openProfilePage(element) {
@@ -89,11 +94,11 @@ export default class MarketplacePage extends Locators {
         cy.openProfilePage(this.elementText.btnCustomMarketplace);
         cy.contains(this.elementText.tabGovernance).click();
         cy.contains(this.elementText.btnCloseMarketplace).click();
-        cy.confirmMetamaskTransaction();  
-            // cy.wait(10000);
+        cy.confirmMetamaskTransaction();
+        // cy.wait(10000);
         cy.waitMetamaskPopUp();
         cy.confirmMetamaskDataSignatureRequest();
-        
+
     }
 
     waitFordataToLoad(locator) {

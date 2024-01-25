@@ -84,8 +84,8 @@ export default class TaskPage extends Locators {
         cy.wait(3000);
 
         cy.get(this.commonPageLocator.btnNext).click();
-        // cy.get(this.commonPageLocator.btnApprove).should('be.enabled').should('not.have.class', 'spinner-border').scrollIntoView().click({ force: true }).wait(1000);
-        cy.waitMetamaskPopUp();
+        cy.get(this.commonPageLocator.btnApprove).should('be.enabled').should('not.have.class', 'spinner-border').scrollIntoView().click({ force: true }).wait(1000);
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
         cy.contains(this.elementText.createTask).should('be.enabled').wait(1000).click({ force: true }).wait(1000);
         cy.confirmMetamaskTransactionAndWaitForMining();

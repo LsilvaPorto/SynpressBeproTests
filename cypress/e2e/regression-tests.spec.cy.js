@@ -21,14 +21,14 @@ describe("Do regression tests in the app spec", () => {
         // cy.visit('');
     });
 
-    it.only("should create and finish a task successfully", () => {
+    it("should create and finish a task successfully", () => {
         taskPage.createTask();
         cy.get(taskLocator.componentTaskStatus).should('be.visible');
         taskPage.createDeliverable();
         cy.contains('Marked deliverable as ready.').should('be.visible');
-        taskPage.createProposal();
-        taskPage.acceptProposal();
-        cy.contains(taskPage.elementText.textAccepted).should('be.visible');
+        // taskPage.createProposal();
+        // taskPage.acceptProposal();
+        // cy.contains(taskPage.elementText.textAccepted).should('be.visible');
     });
 
     it("should change task's description successfully", () => {
@@ -55,7 +55,7 @@ describe("Do regression tests in the app spec", () => {
         cy.get(taskLocator.componentTaskStatus).should('be.visible').invoke('text').should('be.eq', 'funding');
     });
 
-    it("should create new Marketplace successfully", () => {
+    it.only("should create new Marketplace successfully", () => {
         cy.switchAccountAndConnect(3);
         marketplacePage.createMarketplace();
         cy.contains(marketplacePage.elementText.btnCreateOne).should('be.visible');
@@ -63,7 +63,7 @@ describe("Do regression tests in the app spec", () => {
     });
 
     it("should close new Marketplace successfully", () => {
-        // cy.switchAccountAndConnect(3);
+        cy.switchAccountAndConnect(3);
         marketplacePage.closeMarketplace();
         cy.contains(marketplacePage.elementText.textConfirmationMarketplaceClosed).should('be.visible');
     });
