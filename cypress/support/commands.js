@@ -43,14 +43,13 @@ Cypress.Commands.add('connectWalletFirstTime', () => {
 
 Cypress.Commands.add('connectWallet', () => {
     cy.get(locators.commonPageLocator.btnConnectWallet).should('be.enabled').click();
-    // cy.contains(locators.elementText.btnConnectMetamask).should('be.enabled').click();
+    cy.contains(locators.elementText.btnConnectMetamask).should('be.enabled').click();
     cy.confirmMetamaskDataSignatureRequest();
 });
 
 Cypress.Commands.add('openMenuToCreate', (element) => {
     cy.get(locators.explorePageLocator.btnExplore).click();
-    cy.get(locators.commonPageLocator.btnCreate).should('be.visible');
-    cy.get(locators.elementText.btnCreate).click();
+    cy.get(locators.commonPageLocator.btnCreate).should('be.visible').click();
     cy.get(element).click();
     cy.get(locators.commonPageLocator.btnContinueCreation).click();
 });

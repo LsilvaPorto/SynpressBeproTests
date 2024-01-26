@@ -27,44 +27,45 @@ export default class MarketplacePage extends Locators {
         });
     }
     createMarketplace() {
-        cy.openMenuToCreate(this.elementText.textCreateMarketplace);
-        cy.contains('span', 'Max');
+        cy.openMenuToCreate(this.commonPageLocator.btnCreateYourMarketplace);
+        cy.waitForResources();
+        // cy.get(this.marketplacePageLocator.dropdownNetwork).click();
+        // cy.get(this.marketplacePageLocator.dropdownNetworkOptions).click({ force: true });
+        cy.get(this.marketplacePageLocator.btnSelectNetworkNextStep).click();
 
-        //wait page to be ready for interaction
-        cy.reload();
-        cy.get(this.marketplacePageLocator.tBeproAvailable).should('not.have.text', '0');
         cy.contains(this.elementText.btnMax).click();
-        cy.contains(this.elementText.btnApprove).should('be.enabled').click();
+        cy.get(this.commonPageLocator.btnApproveLock).should('be.enabled').click();
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
+        cy.get(this.marketplacePageLocator.btnLockTBepro).click();
+        cy.waitForResources();
+        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.get(this.marketplacePageLocator.btnLockTBeproNextStep).click();
 
-        //btn lockBepro
-        cy.get(this.marketplacePageLocator.btnLockTBepro).click().wait(1000);
-        cy.confirmMetamaskTransaction();
-
-        cy.contains(this.elementText.btnNextStep).click();
         this.uploadLogoIco();
         this.uploadFullLogo();
         cy.get(this.marketplacePageLocator.inputMarketplaceName).type(this.createMarketplaceName());
         cy.createDescription().then((description) => {
-            cy.get(this.marketplacePageLocator.inputMarketplaceDescription).type(description);
+            cy.get(this.commonPageLocator.textareaDescriptionCreateTaskDeliverableOrMarketplace).type(description);
         });
-
-
-        cy.get(this.marketplacePageLocator.btnNextStep2).click();
+        cy.get(this.marketplacePageLocator.btnMarketplaceInformationNextStep).click();
 
         cy.get(this.marketplacePageLocator.inputDisputeTime).clear().type(60);
         cy.get(this.marketplacePageLocator.inputDraftTime).clear().type(60);
         cy.get(this.marketplacePageLocator.inputCuratorAmount).clear().type(1000);
-        cy.get(this.marketplacePageLocator.btnNextStep3).click();
+        cy.get(this.marketplacePageLocator.btnMarketplaceSettingsNextStep).click();
         //dropdown 
-        // cy.get(this.marketplacePageLocator.dropdownTransactionalTokens).click();
-        // cy.get(this.marketplacePageLocator.beproTransactionalTokens).click();
-        // cy.get(this.marketplacePageLocator.dropdownRewardTokens).click();
-        // cy.get(this.marketplacePageLocator.beproRewardTokens).click();
-        cy.contains(this.elementText.btnCreateMarketplace).click();
+        cy.get(this.marketplacePageLocator.dropdownTransactionalTokens).click();
+        cy.get(this.marketplacePageLocator.beproTransactionalTokens).click();
+        cy.get(this.marketplacePageLocator.dropdownRewardTokens).click();
+        cy.get(this.marketplacePageLocator.beproRewardTokens).click();
+
+        cy.get(this.marketplacePageLocator.btnCreateMarketplace).click();
+        cy.waitForResources();
 
         //all confirmation to create network 
-        cy.confirmMetamaskDataSignatureRequest().wait(1000);
+        cy.confirmMetamaskDataSignatureRequest();
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
 
         cy.contains('Deploying Marketplace (Changing draft time)');
@@ -91,14 +92,12 @@ export default class MarketplacePage extends Locators {
     }
 
     closeMarketplace() {
-        cy.openProfilePage(this.elementText.btnCustomMarketplace);
-        cy.contains(this.elementText.tabGovernance).click();
-        cy.contains(this.elementText.btnCloseMarketplace).click();
+        cy.openProfilePage(this.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.get(this.managementPageLocator.tabGovernance).click();
+        cy.get(this.managementPageLocator.btnCloseMarketplace).click();
         cy.confirmMetamaskTransaction();
-        // cy.wait(10000);
-        cy.waitMetamaskPopUp();
+        cy.waitForResources();
         cy.confirmMetamaskDataSignatureRequest();
-
     }
 
     waitFordataToLoad(locator) {
@@ -115,12 +114,14 @@ export default class MarketplacePage extends Locators {
             })
     }
 
-    setMarketplaceConfig(elTab, tab, configToChange, valueToChange) {
-        const locatorToWait = configToChange;
-        cy.contains(elTab, tab).click({ force: true });
-        this.waitFordataToLoad(locatorToWait);
+    setMarketplaceConfig(tab, configToChange, valueToChange) {
+        // const locatorToWait = configToChange;
+        cy.get(tab).click({ force: true });
+        // this.waitFordataToLoad(locatorToWait);
+        cy.waitForResources();
         cy.get(configToChange).clear().type(valueToChange);
-        cy.contains(this.elementText.btnSaveChanges).click().wait(1000);
+        cy.contains(this.elementText.btnSaveChanges).click();
+        cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
     }
 

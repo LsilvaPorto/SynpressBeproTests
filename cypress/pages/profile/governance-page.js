@@ -3,27 +3,27 @@ import MarketplacePage from "../marketplace/marketplace-page";
 export default class GovernancePage extends MarketplacePage {
 
     setDisputeTime(disputeTime = 60) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputDisputeTime, disputeTime);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputDisputeTime, disputeTime);
     }
 
     setPercentageForDispute(percentageForDispute = 3) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputPercentageForDispute, percentageForDispute);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputPercentageForDispute, percentageForDispute);
     }
 
     setDraftTime(draftTime = 60) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputDisputeTime, draftTime);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputDisputeTime, draftTime);
     }
 
     setCuratorAmount(curatorAmount = 10000) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputDisputeTime, curatorAmount);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputDisputeTime, curatorAmount);
     }
 
     setMergerFee(mergerFee = 0.05) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputDisputeTime, mergerFee);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputDisputeTime, mergerFee);
     }
 
     setProposalCreatorFee(proposalCreatorFee = 2) {
-        this.setMarketplaceConfig(this.commonPageLocator.span, this.elementText.tabGovernance, this.managementPageLocator.inputDisputeTime, proposalCreatorFee);
+        this.setMarketplaceConfig(this.managementPageLocator.tabGovernance, this.managementPageLocator.inputDisputeTime, proposalCreatorFee);
     }
 
 }
