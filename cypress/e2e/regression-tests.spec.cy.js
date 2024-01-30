@@ -20,7 +20,7 @@ describe("Do regression tests in the app spec", () => {
         // cy.visit('');
     });
 
-    it("should create and finish a task successfully", () => {
+    it.only("should create and finish a task successfully", () => {
         taskPage.createTask();
         cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
         taskPage.createDeliverable();
@@ -34,6 +34,16 @@ describe("Do regression tests in the app spec", () => {
         taskPage.createTask();
         cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
         taskPage.changeTaskDescription();
+    });
+
+    it("should change task's and tags value successfully", () => {
+        taskPage.createTask();
+        cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
+        taskPage.changeTaskTags();
+        cy.contains(locators.elementText.toastySuccess).should('be.visible');
+        taskPage.changeTaskValue();
+        cy.get(locators.taskPageLocator.textTaskValue).invoke('text').should('be.eq', '1,001.00000');
+        cy.contains(locators.elementText.toastySuccess).should('be.visible');
     });
 
     it("should Cancel task successfully", () => {
@@ -53,30 +63,38 @@ describe("Do regression tests in the app spec", () => {
         cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible').invoke('text').should('be.eq', 'funding');
     });
 
-    it.only("should create new Marketplace successfully", () => {
+    it("should create new Marketplace successfully", () => {
         cy.switchAccountAndConnect(3);
         marketplacePage.createMarketplace();
         cy.get(locators.marketplacePageLocator.btnCreateOne).should('be.visible');
 
     });
 
-    it.only("should close new Marketplace successfully", () => {
+    it("should close new Marketplace successfully", () => {
         // cy.switchAccountAndConnect(3);
         marketplacePage.closeMarketplace();
         cy.contains(locators.elementText.textConfirmationMarketplaceClosed).should('be.visible');
     });
 
-    // it("should lock token value successfully", () => {
-    //     profilePage.lockVotes();
-    // });
+    it("should lock token value successfully", () => {
+        cy.openProfilePage(locators.commonPageLocator.btnVotingPowerProfileMenu);
+        profilePage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
+        profilePage.lockVotes(1000);
+        cy.contains('sucess').should('be.visible');
+    });
 
-    // it("should unlock token value successfully", () => {
+    it("should unlock token value successfully", () => {
+        cy.openProfilePage(locators.commonPageLocator.btnVotingPowerProfileMenu);
+        profilePage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
+        profilePage.unlockVotes(1000);
+        cy.contains('sucess').should('be.visible');
+    });
 
-    // });
-
-    // it("should change task's tag and value successfully", () => {
-
-    // });
+    it("should change task's tag and value successfully", () => {
+        taskPage.createTask();
+        cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
+        taskPage.changeTaskTags();
+    });
 
     // it("should change Governor options successfully", () => {
 

@@ -36,14 +36,15 @@ export default class TaskPage extends Locators {
 
     insertTag() {
         cy.get(this.commonPageLocator.inputTags).click();
-        cy.get(this.commonPageLocator.tagTesting).click();
-
+        this.getRandomTag().then((tag) => {
+            cy.contains(tag).click({ force: true });
+          })
     }
 
     fillTaskValue() {
         cy.waitForResources();
         const value = this.createTaskValue();
-        cy.get(this.commonPageLocator.inputTotalAmmount).type(value);
+        cy.get(this.taskPageLocator.inputTotalAmmount).type(value);
         cy.waitForResources();
     }
 
@@ -69,7 +70,41 @@ export default class TaskPage extends Locators {
         cy.confirmMetamaskPermissionToSpend();
         cy.get(this.taskPageLocator.btnCreateTask).should('be.enabled').click({ force: true });
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
+    }
+
+    changeTaskTags() {
+        cy.get(this.taskPageLocator.btnTaskEdit).click({ force: true });
+        cy.get(this.taskPageLocator.reactInputDropdownEditTags).click({ force: true });
+        this.getRandomTag().then((tag) => {
+            cy.contains(tag).click({ force: true });
+          })
+        cy.get('button').contains(this.elementText.btnSaveChanges).click({ force: true });
+
+    }
+
+    getRandomNumber(numberInterval) {
+        const sortedNumber = Math.floor(Math.random() * numberInterval);
+        return sortedNumber;
+    }
+
+    getRandomTag() {
+        return cy.fixture('tag-list').then((list) => {
+            const randomTag = list[this.getRandomNumber(56)];
+            return randomTag;
+        });
+    }
+
+    changeTaskValue() {
+        cy.get(this.taskPageLocator.btnTaskUpdateAmount).click({ force: true });
+        cy.waitForResources();
+        cy.get(this.taskPageLocator.inputSetReward).clear().type(1001);
+        cy.get(this.taskPageLocator.btnTaskUpdateAmountApprove).click();
+        cy.waitForResources();
+        cy.confirmMetamaskPermissionToSpend();
+        cy.get(this.taskPageLocator.btnTaskUpdateAmountConfirm).click();
+        cy.waitForResources();
+        cy.confirmMetamaskTransaction();
     }
 
     createFundingRequest() {
@@ -82,7 +117,7 @@ export default class TaskPage extends Locators {
         cy.get(this.taskPageLocator.btnNextCreateTask).click();
         cy.get(this.taskPageLocator.btnCreateTask).should('be.enabled').click({ force: true });
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
 
     }
 
@@ -104,7 +139,7 @@ export default class TaskPage extends Locators {
 
         cy.get(this.taskPageLocator.btnCreateTask).should('be.enabled').click({ force: true });
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
 
     }
 
@@ -120,7 +155,7 @@ export default class TaskPage extends Locators {
         cy.get(this.taskPageLocator.btnTaskOptions).should('be.visible').click({ force: true });
         cy.get(this.taskPageLocator.btnTaskCancel).should('be.visible').click();
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
     }
 
     waitTaskChangeStatusToOpen() {
@@ -167,10 +202,10 @@ export default class TaskPage extends Locators {
         cy.get(this.commonPageLocator.textareaDescriptionCreateTaskDeliverableOrMarketplace).type(this.createTaskDescription(), { force: true });
         cy.get(this.taskPageLocator.btnConfirmCreateDeliverable).should('be.enabled').click();
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
         cy.get(this.taskPageLocator.btnMarkAsReady).wait(1000).click();
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
         cy.get(this.taskPageLocator.btnArrowBackFromDeliverable).click({ force: true });
     }
 
@@ -180,7 +215,7 @@ export default class TaskPage extends Locators {
         cy.get(this.taskPageLocator.dropdownOptionProposal).first().click({ force: true });
         cy.get(this.taskPageLocator.btnModalCreateProposal).click({ force: true });
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
 
     }
 
@@ -207,6 +242,6 @@ export default class TaskPage extends Locators {
         })
         cy.get(this.taskPageLocator.btnConfirmDistribution).should('be.enabled').should('be.visible').click({ force: true });
         cy.waitForResources();
-        cy.confirmMetamaskTransactionAndWaitForMining();
+        cy.confirmMetamaskTransaction();
     }
 }

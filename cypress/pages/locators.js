@@ -23,11 +23,11 @@ export default class Locators {
         btnAcceptCookies: "#rcc-confirm-button",
         btnApproveLock: "[data-testid='approve-btn']",
         textareaDescriptionCreateTaskDeliverableOrMarketplace: "[data-testid='description-textarea']",
+        classOptionDropdown:'.react-select__option',
         //rever esses de baixo
         inputMarketPlaceSelect: "#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div > div > div.select-network-dropdown.w-max-none > div > div",
         beproMarketSelect: ".react-select__option",
-        inputTags: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div.form-group.mt-4.mb-0 > div.react-select-container.css-b62m3t-container > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',
-        tagTesting: '.react-select__menu .react-select__option:contains("Testing")',        
+        inputTags: '#root-container > div.d-none.d-md-flex.flex-column > div:nth-child(1) > div > div > div.d-none.d-md-flex.mx-2.flex-column.bg-gray-900.p-4.border-radius-4.border.border-gray-850 > div.form-group.mt-4.mb-0 > div.react-select-container.css-b62m3t-container > div > div.react-select__value-container.react-select__value-container--is-multi.css-hlgwow > div.react-select__input-container.css-19bb58m',     
     };
 
     taskPageLocator = {
@@ -58,8 +58,12 @@ export default class Locators {
         btnTaskOptions: "[data-testid='task-options']",
         btnTaskCancel: "[data-testid='cancel-btn']",
         btnTaskUpdateAmount: "[data-testid='update-amount-btn']",
+        btnTaskUpdateAmountApprove: "[data-testid='update-amount-modal-approve-btn']",
+        btnTaskUpdateAmountConfirm: "[data-testid='update-amount-modal-confirm-btn']",
         btnTaskEdit: "[data-testid='edit-bounty-btn']",
+        reactInputDropdownEditTags: '.react-select__input-container',
         textTaskStatus: "[data-testid='task-status']",
+        textTaskValue: "span.text-white.caption-large.font-weight-normal",
         textareaTaskComments: "[data-testid='comments-textarea']",
         btnTaskComment: "[data-testid='comments-btn']",
         btnTaskStartWorking: "[data-testid='start-working-btn']",
@@ -119,10 +123,13 @@ export default class Locators {
         inputSearchBarWalletTokens: "[data-testid='wallet-search-input']",
         tabLock: "[data-testid='Lock']",
         tabUnlock: "[data-testid='Unlock']",
-        inputBeproAmountToLock: "[data-testid='BEPRO Amount]",
+        inputSelectMarketplace: "[data-testid='marketplace-filter'] input",
+        inputSelectNetwork:"[data-testid='chain-filter'] input",
+        inputBeproAmountToLock: "[data-testid='TBEPRO Amount']",
         btnGetVotes: "[data-testid='get-votes-btn']",
-        inputBeproVotesAmountToUnlock: "[data-testid='BEPRO Votes Amount]",
+        inputBeproVotesAmountToUnlock: "[data-testid='TBEPRO Votes Amount']",
         btnGetVotesUnlock: "[data-testid='get-votes-btn']",
+        modalConfirmGetVotes: "[data-testid='modal-oracle-confirm-btn']",
         inputDelegateVotesAmount: "[data-testid='votes-amount-input']",
         inputDelegateVotesAddress: "[data-testid='delegate-address-input']",
         btnDelegateVotes: "[data-testid='Delegate']",
@@ -181,6 +188,7 @@ export default class Locators {
         btnSaveChanges: 'Save Changes',
         textConfirmationMarketplaceClosed: "You don't have a custom marketplace created",
         btnAdd: 'Add',
+        toastySuccess: 'Success',
         btnConnectMetamask: 'Metamask',
     }
 

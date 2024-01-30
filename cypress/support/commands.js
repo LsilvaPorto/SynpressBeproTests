@@ -72,4 +72,3 @@ Cypress.Commands.add('switchAccountAndConnect', (account) => {
     cy.switchMetamaskAccount(account);
     cy.connectWallet();
 });
-
