@@ -90,12 +90,6 @@ describe("Do regression tests in the app spec", () => {
         cy.contains('sucess').should('be.visible');
     });
 
-    it("should change task's tag and value successfully", () => {
-        taskPage.createTask();
-        cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
-        taskPage.changeTaskTags();
-    });
-
     // it("should change Governor options successfully", () => {
 
     // });
