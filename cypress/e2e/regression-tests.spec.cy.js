@@ -20,7 +20,7 @@ describe("Do regression tests in the app spec", () => {
         // cy.visit('');
     });
 
-    it.only("should create and finish a task successfully", () => {
+    it("should create and finish a task successfully", () => {
         taskPage.createTask();
         cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
         taskPage.createDeliverable();
