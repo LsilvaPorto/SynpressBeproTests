@@ -14,31 +14,18 @@ describe("Do regression tests in the app spec", () => {
         cy.visit('');
         cy.get(locators.commonPageLocator.btnAcceptCookies).click();
         cy.connectWalletFirstTime();
-        // cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
-        // governancePage.setDisputeTime();
-        // governancePage.setDraftTime();
-        // registryPage.setCancelFee();
-        // cy.visit('');
+        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        governancePage.setDisputeTime();
+        governancePage.setDraftTime();
+        registryPage.setCancelFee();
+        cy.visit('');
     });
 
-    afterEach(() => {
-        // cy.visit('');
-    });
-
-    // after(() => {
-    //     governancePage.setDisputeTime();
-    //     governancePage.setPercentageForDispute();
-    //     governancePage.setDraftTime();
-    //     governancePage.setCuratorAmount();
-    //     governancePage.setMergerFee();
-    //     governancePage.setProposalCreatorFee();
-    // });
-
-    it.only("should create and finish a task successfully", () => {
-        // taskPage.createTask();
-        // cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
-        // taskPage.createDeliverable();
-        // cy.contains('Marked deliverable as ready.').should('be.visible');
+    it("should create and finish a task successfully", () => {
+        taskPage.createTask();
+        cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
+        taskPage.createDeliverable();
+        cy.contains('Marked deliverable as ready.').should('be.visible');
         taskPage.createProposal();
         taskPage.acceptProposal();
         cy.contains(locators.elementText.textAccepted).should('be.visible');
