@@ -83,15 +83,12 @@ export default class TaskPage extends Locators {
 
     }
 
-    getRandomNumber(numberInterval) {
-        const sortedNumber = Math.floor(Math.random() * numberInterval);
-        return sortedNumber;
-    }
-
     getRandomTag() {
         return cy.fixture('tag-list').then((list) => {
-            const randomTag = list[this.getRandomNumber(56)];
-            return randomTag;
+            cy.getRandomInt(0, 56).then((randomNumber) => {
+                const randomTag = list[randomNumber];
+                return randomTag;
+            })
         });
     }
 

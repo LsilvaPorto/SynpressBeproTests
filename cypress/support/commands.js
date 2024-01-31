@@ -72,3 +72,17 @@ Cypress.Commands.add('switchAccountAndConnect', (account) => {
     cy.switchMetamaskAccount(account);
     cy.connectWallet();
 });
+
+Cypress.Commands.add('getRandomInt', (min, max) => {
+    max = max === undefined ? min : max;
+    min = max === undefined ? 0 : min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+})
+
+Cypress.Commands.add('getRandomFloat', (min, max) => {
+    max = max === undefined ? min : max;
+    min = max === undefined ? 0 : min;
+    const randomNumber = Math.random() * (max - min) + min;
+    return parseFloat(randomNumber.toFixed(2));
+})
+

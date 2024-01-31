@@ -1,7 +1,9 @@
 import MarketplacePage from "../pages/marketplace/marketplace-page";
 import TaskPage from "../pages/task/task-page";
 import Locators from "../pages/locators";
-import ProfilePage from "../pages/profile/profile-page";
+import { RegistryPage, GovernancePage, ProfilePage } from "../pages/profile";
+const registryPage = new RegistryPage();
+const governancePage = new GovernancePage();
 const locators = new Locators();
 const marketplacePage = new MarketplacePage();
 const taskPage = new TaskPage();
@@ -9,22 +11,34 @@ const profilePage = new ProfilePage();
 
 describe("Do regression tests in the app spec", () => {
     before(() => {
-        cy.visit('').then(() => {
-            cy.get(locators.commonPageLocator.btnAcceptCookies).click();
-        })
+        cy.visit('');
+        cy.get(locators.commonPageLocator.btnAcceptCookies).click();
         cy.connectWalletFirstTime();
-       
+        // cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        // governancePage.setDisputeTime();
+        // governancePage.setDraftTime();
+        // registryPage.setCancelFee();
+        // cy.visit('');
     });
 
     afterEach(() => {
         // cy.visit('');
     });
 
-    it("should create and finish a task successfully", () => {
-        taskPage.createTask();
-        cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
-        taskPage.createDeliverable();
-        cy.contains('Marked deliverable as ready.').should('be.visible');
+    // after(() => {
+    //     governancePage.setDisputeTime();
+    //     governancePage.setPercentageForDispute();
+    //     governancePage.setDraftTime();
+    //     governancePage.setCuratorAmount();
+    //     governancePage.setMergerFee();
+    //     governancePage.setProposalCreatorFee();
+    // });
+
+    it.only("should create and finish a task successfully", () => {
+        // taskPage.createTask();
+        // cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
+        // taskPage.createDeliverable();
+        // cy.contains('Marked deliverable as ready.').should('be.visible');
         taskPage.createProposal();
         taskPage.acceptProposal();
         cy.contains(locators.elementText.textAccepted).should('be.visible');
@@ -90,13 +104,52 @@ describe("Do regression tests in the app spec", () => {
         cy.contains('sucess').should('be.visible');
     });
 
-    // it("should change Governor options successfully", () => {
+    it("should change Governor options successfully", () => {
+        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.getRandomInt(60, 1728000).then((randomNumber) => {
+            governancePage.setDisputeTime(randomNumber);
+        })
+        cy.getRandomFloat(1, 51).then((randomNumber) => {
+            governancePage.setPercentageForDispute(randomNumber);
 
-    // });
+        })
+        cy.getRandomInt(60, 1728000).then((randomNumber) => {
+            governancePage.setDraftTime(randomNumber);
 
-    // it("should change registry options successfully", () => {
+        })
+        cy.getRandomInt(1, 10000).then((randomNumber) => {
+            governancePage.setCuratorAmount(randomNumber);
 
-    // });
+        })
+        cy.getRandomFloat(0, 10).then((randomNumber) => {
+            governancePage.setMergerFee(randomNumber);
+
+        })
+        cy.getRandomFloat(0, 10).then((randomNumber) => {
+            governancePage.setProposalCreatorFee(randomNumber);
+
+        })
+
+    });
+
+    it("should change registry options successfully", () => {
+        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.getRandomFloat(0, 100).then((randomNumber) => {
+            registryPage.setCancelFee(randomNumber);
+        })
+        cy.getRandomFloat(0, 90).then((randomNumber) => {
+            registryPage.setCloseFee(randomNumber);
+
+        })
+        cy.getRandomFloat(0, 99).then((randomNumber) => {
+            registryPage.setMarketplaceCreationFee(randomNumber);
+
+        })
+        cy.getRandomInt(0, 50000).then((randomNumber) => {
+            registryPage.setMarketplaceCreationAmount(randomNumber);
+
+        })
+    });
 
 
 });

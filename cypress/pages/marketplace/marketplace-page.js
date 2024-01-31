@@ -100,29 +100,4 @@ export default class MarketplacePage extends Locators {
         cy.confirmMetamaskDataSignatureRequest();
     }
 
-    waitFordataToLoad(locator) {
-        cy.get(locator)
-            .invoke('val')
-            .then((value) => {
-                const valorNumerico = parseFloat(value);
-                if (valorNumerico > 0) {
-                    cy.wait(100);
-                } else {
-                    cy.wait(2000);
-                    this.waitFordataToLoad(locator);
-                }
-            })
-    }
-
-    setMarketplaceConfig(tab, configToChange, valueToChange) {
-        // const locatorToWait = configToChange;
-        cy.get(tab).click({ force: true });
-        // this.waitFordataToLoad(locatorToWait);
-        cy.waitForResources();
-        cy.get(configToChange).clear().type(valueToChange);
-        cy.contains(this.elementText.btnSaveChanges).click();
-        cy.waitForResources();
-        cy.confirmMetamaskPermissionToSpend();
-    }
-
 }

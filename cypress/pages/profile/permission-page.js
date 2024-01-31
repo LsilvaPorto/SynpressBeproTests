@@ -1,7 +1,6 @@
-import MarketplacePage from "./marketplace";
-const { faker } = require('@faker-js/faker');
+import Locators from "../locators";
 
-export default class PermissionPage extends MarketplacePage {
+export default class PermissionPage extends Locators {
     setBannedDomain(domain){
         cy.contains(this.elementText.tabPermissions).click();
         cy.get(this.managementPageLocator.inputBannedDomains).type(domain);
