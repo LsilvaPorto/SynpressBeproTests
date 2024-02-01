@@ -1,20 +1,20 @@
 import MarketplacePage from "../pages/marketplace/marketplace-page";
 import TaskPage from "../pages/task/task-page";
 import Locators from "../pages/locators";
-import { RegistryPage, GovernancePage, ProfilePage } from "../pages/profile";
+import { RegistryPage, GovernancePage, VotingPowerPage } from "../pages/profile";
 const registryPage = new RegistryPage();
 const governancePage = new GovernancePage();
 const locators = new Locators();
 const marketplacePage = new MarketplacePage();
 const taskPage = new TaskPage();
-const profilePage = new ProfilePage();
+const votingPowerPage = new VotingPowerPage();
 
 describe("Do regression tests in the app spec", () => {
     before(() => {
         cy.visit('');
         cy.get(locators.commonPageLocator.btnAcceptCookies).click();
         cy.connectWalletFirstTime();
-        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.openSettingsPage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
         governancePage.setDisputeTime();
         governancePage.setDraftTime();
         registryPage.setCancelFee();
@@ -78,21 +78,21 @@ describe("Do regression tests in the app spec", () => {
     });
 
     it("should lock token value successfully", () => {
-        cy.openProfilePage(locators.commonPageLocator.btnVotingPowerProfileMenu);
-        profilePage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
-        profilePage.lockVotes(1000);
+        cy.openSettingsPage(locators.commonPageLocator.btnVotingPowerProfileMenu);
+        votingPowerPage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
+        votingPowerPage.lockVotes(1000);
         cy.contains('sucess').should('be.visible');
     });
 
     it("should unlock token value successfully", () => {
-        cy.openProfilePage(locators.commonPageLocator.btnVotingPowerProfileMenu);
-        profilePage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
-        profilePage.unlockVotes(1000);
+        cy.openSettingsPage(locators.commonPageLocator.btnVotingPowerProfileMenu);
+        votingPowerPage.selectMarketplaceAndNetwork('bepro', 'Mumbai');
+        votingPowerPage.unlockVotes(1000);
         cy.contains('sucess').should('be.visible');
     });
 
     it("should change Governor options successfully", () => {
-        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.openSettingsPage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
         cy.getRandomInt(60, 1728000).then((randomNumber) => {
             governancePage.setDisputeTime(randomNumber);
         })
@@ -120,7 +120,7 @@ describe("Do regression tests in the app spec", () => {
     });
 
     it("should change registry options successfully", () => {
-        cy.openProfilePage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
+        cy.openSettingsPage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
         cy.getRandomFloat(0, 100).then((randomNumber) => {
             registryPage.setCancelFee(randomNumber);
         })
