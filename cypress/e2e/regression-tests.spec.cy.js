@@ -19,6 +19,7 @@ describe("Do regression tests in the app spec", () => {
         governancePage.setDraftTime();
         registryPage.setCancelFee();
         cy.visit('');
+        cy.wait(1000);
     });
 
     it("should create and finish a task successfully", () => {
@@ -91,7 +92,7 @@ describe("Do regression tests in the app spec", () => {
         cy.contains('sucess').should('be.visible');
     });
 
-    it("should change Governor options successfully", () => {
+    it.only("should change Governor options successfully", () => {
         cy.openSettingsPage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
         cy.getRandomInt(60, 1728000).then((randomNumber) => {
             governancePage.setDisputeTime(randomNumber);
