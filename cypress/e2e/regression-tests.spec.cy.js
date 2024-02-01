@@ -92,7 +92,7 @@ describe("Do regression tests in the app spec", () => {
         cy.contains('sucess').should('be.visible');
     });
 
-    it.only("should change Governor options successfully", () => {
+    it("should change Governor options successfully", () => {
         cy.openSettingsPage(locators.commonPageLocator.btnCustomMarketplaceProfileMenu);
         cy.getRandomInt(60, 1728000).then((randomNumber) => {
             governancePage.setDisputeTime(randomNumber);
