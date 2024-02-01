@@ -4,7 +4,7 @@ export default class Locators {
         btnConnectWallet: "[data-testid='connect-wallet-button']",
         btnCreate: "[data-testid='create-btn']",
         profileIcon: "[data-testid='avatar-or-identicon']",
-        btnMyProfile: "[data-testid='My profile']",
+        btnSettings: "[data-testid='Settings']",
         btnWalletProfileMenu: "[data-testid='Wallet']",
         btnVotingPowerProfileMenu: "[data-testid='Voting Power']",
         btnPaymentsProfileMenu: "[data-testid='Payments']",
