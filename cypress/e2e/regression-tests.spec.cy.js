@@ -32,7 +32,7 @@ describe("Do regression tests in the app spec", () => {
         cy.contains(locators.elementText.textAccepted).should('be.visible');
     });
 
-    it.only("should change task's description successfully", () => {
+    it("should change task's description successfully", () => {
         taskPage.createTask();
         cy.get(locators.taskPageLocator.textTaskStatus).should('be.visible');
         taskPage.changeTaskDescription();
