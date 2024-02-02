@@ -1,7 +1,7 @@
 import Locators from "../locators";
 const { faker } = require('@faker-js/faker');
 
-export default class ProfilePage extends Locators {
+export default class VotingPowerPage extends Locators {
 
     selectMarketplaceAndNetwork(marketplaceName = 'bepro', networkName = 'Mumbai') {
         cy.get(this.managementPageLocator.inputSelectMarketplace).click({ force: true });

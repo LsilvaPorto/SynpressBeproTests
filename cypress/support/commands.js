@@ -61,7 +61,7 @@ Cypress.Commands.add('createDescription', () => {
 });
 
 
-Cypress.Commands.add('openProfilePage', (element) => {
+Cypress.Commands.add('openSettingsPage', (element) => {
     cy.get(locators.commonPageLocator.profileIcon).click().wait(500);
     cy.get(element).click().wait(1000);
 });

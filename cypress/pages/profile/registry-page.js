@@ -2,11 +2,21 @@ import Locators from "../locators";
 
 export default class RegistryPage extends Locators {
 
-    setRegistrySettings(tab, configToChange, valueToChange, saveButton){
-        cy.get(this.managementPageLocator.inputPrimaryColor).should('be.visible');
+    setRegistrySettings(tab, configToChange, valueToChange, saveButton) {
         cy.get(tab).click();
         cy.waitForResources();
-        cy.get(configToChange).wait(500).clear().type(valueToChange);
+        cy.get(configToChange).then((input) => {
+            this.tryToChangeParameters(input, valueToChange, saveButton);
+        })
+    }
+
+    tryToChangeParameters(input, valueToChange, saveButton) {
+        if (input.val() == valueToChange) {
+            cy.log('No need to change the value');
+            cy.get(this.managementPageLocator.tabLogoAndColors).click({ force: true });
+            return;
+        }
+        cy.wrap(input).clear().type(valueToChange);
         cy.contains(this.commonPageLocator.btn, saveButton).should('be.enabled').click({ force: true });
         cy.waitForResources();
         cy.confirmMetamaskPermissionToSpend();
