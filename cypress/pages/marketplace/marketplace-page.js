@@ -6,31 +6,10 @@ export default class MarketplacePage extends Locators {
         const mp = faker.company.name();
         return mp.toString();
     }
-
-    uploadLogoIco() {
-        cy.fixture('Bepro-ico.svg').then(fileContent => {
-            cy.get(this.marketplacePageLocator.logoIcon).attachFile({
-                fileContent: fileContent.toString(),
-                fileName: 'Bepro-ico.svg',
-                mimeType: 'image/svg+xml'
-            });
-        });
-    }
-
-    uploadFullLogo() {
-        cy.fixture('Bepro-logo.svg').then(fileContent => {
-            cy.get(this.marketplacePageLocator.fullLogo).attachFile({
-                fileContent: fileContent.toString(),
-                fileName: 'Bepro-logo.svg',
-                mimeType: 'image/svg+xml'
-            });
-        });
-    }
+    
     createMarketplace() {
         cy.openMenuToCreate(this.commonPageLocator.btnCreateYourMarketplace);
         cy.waitForResources();
-        // cy.get(this.marketplacePageLocator.dropdownNetwork).click();
-        // cy.get(this.marketplacePageLocator.dropdownNetworkOptions).click({ force: true });
         cy.get(this.marketplacePageLocator.btnSelectNetworkNextStep).click();
 
         cy.contains(this.elementText.btnMax).click();
@@ -42,8 +21,8 @@ export default class MarketplacePage extends Locators {
         cy.confirmMetamaskTransactionAndWaitForMining();
         cy.get(this.marketplacePageLocator.btnLockTBeproNextStep).click();
 
-        this.uploadLogoIco();
-        this.uploadFullLogo();
+        cy.uploadFile('Bepro-ico.svg',this.marketplacePageLocator.logoIcon);
+        cy.uploadFile('Bepro-logo.svg',this.marketplacePageLocator.fullLogo);
         cy.get(this.marketplacePageLocator.inputMarketplaceName).type(this.createMarketplaceName());
         cy.createDescription().then((description) => {
             cy.get(this.commonPageLocator.textareaDescriptionCreateTaskDeliverableOrMarketplace).type(description);

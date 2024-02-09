@@ -4,6 +4,7 @@ const synpressPlugins = require("@synthetixio/synpress/plugins");
 module.exports = defineConfig({
   env: {...process.env },
   userAgent: "synpress",
+  projectId: "3ppnjt",
   chromeWebSecurity: true,
   viewportWidth: 1688,
   viewportHeight: 768,

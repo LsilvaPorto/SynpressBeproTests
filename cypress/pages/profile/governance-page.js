@@ -12,7 +12,9 @@ export default class GovernancePage extends Locators {
     }
 
     tryToChangeParameters(input, valueToChange, saveButton) {
-        if (input.val() == valueToChange) {
+        if (input.val == 0) {
+            cy.waitForResources();
+        } else if (input.val() == valueToChange) {
             cy.log('No need to change the value');
             cy.get(this.managementPageLocator.tabLogoAndColors).click({ force: true });
             return;

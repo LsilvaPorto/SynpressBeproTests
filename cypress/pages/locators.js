@@ -2,7 +2,7 @@ export default class Locators {
 
     commonPageLocator = {
         btnConnectWallet: "[data-testid='connect-wallet-button']",
-        btnCreate: "[data-testid='create-btn']",
+        btnCreate: "[data-testid='create-marketplace-options-button']",
         profileIcon: "[data-testid='avatar-or-identicon']",
         btnSettings: "[data-testid='Settings']",
         btnWalletProfileMenu: "[data-testid='Wallet']",
